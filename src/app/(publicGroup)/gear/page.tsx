@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import GearGridSkeleton from '../_components/gear/GearGridSkeleton';
+import GearList from '../_components/gear/GearList';
 
 const GearPage = () => {
   return (
     <div>
-      Gear page
+      <Suspense fallback={<GearGridSkeleton />}>
+        <GearList />
+      </Suspense>
     </div>
   );
 };
