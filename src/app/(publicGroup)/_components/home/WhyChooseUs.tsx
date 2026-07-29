@@ -33,7 +33,7 @@ const WhyChooseUs = () => {
       <div className="container">
         {/* Heading */}
 
-        <div className="mx-auto mb-14 max-w-2xl text-center">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
           <span className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
             Why Choose GearUp
           </span>

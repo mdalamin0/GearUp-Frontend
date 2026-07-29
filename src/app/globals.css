@@ -325,7 +325,7 @@
   } */
 
   .heading {
-    @apply text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl xl:text-7xl;
+    @apply text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl ;
   }
 
 
