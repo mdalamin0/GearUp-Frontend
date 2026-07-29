@@ -25,7 +25,6 @@ import {
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Browse Gear", href: "/gear" },
-  { label: "Categories", href: "/categories" },
   { label: "About", href: "/about" },
 ];
 
@@ -39,6 +38,7 @@ const Navbar = () => {
    * TODO:
    * Replace with Auth Context
    */
+  // const user = "alamin@gmail.com";
   const user = null;
 
   const handleLogout = async () => {

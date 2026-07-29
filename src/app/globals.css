@@ -320,11 +320,28 @@
     @apply py-10 md:py-16;
   }
 
-  .heading {
+  /* .heading {
     @apply text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl;
+  } */
+
+  .heading {
+    @apply text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl xl:text-7xl;
   }
+
 
   .sub-heading {
     @apply text-muted-foreground md:text-lg leading-8;
   }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  /* .grid-auto-fit {
+    @apply grid grid-cols-[repeat(auto-fit, minmax(250px, 1fr))];
+  } */
 }
