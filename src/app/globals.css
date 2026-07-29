@@ -313,7 +313,7 @@
   }
 
   .section {
-    @apply py-14 md:py-20;
+    @apply pt-16 pb-5 md:pt-24 ;
   }
 
   .section-sm {

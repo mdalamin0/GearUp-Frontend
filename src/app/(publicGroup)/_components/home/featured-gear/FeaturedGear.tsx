@@ -7,7 +7,7 @@ const FeaturedGear = () => {
   return (
     <section className="section">
       <div className="container">
-        <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="mx-auto mb-14 max-w-2xl text-center">
           <div className="max-w-2xl">
             <span className="mb-3 inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
               Featured Collection

@@ -20,7 +20,7 @@ const FeaturedGearList = async () => {
   }
 
   return (
-    <div className=" section grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+    <div className=" grid gap-6 sm:grid-cols-2 md:grid-cols-3">
       {gears?.map((gear: IGear) => (
         <GearCard key={gear.id} gear={gear} />
       ))}
