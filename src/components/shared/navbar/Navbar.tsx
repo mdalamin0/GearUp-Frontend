@@ -113,12 +113,12 @@ const Navbar = () => {
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" asChild>
-                  <Link href="/login">Login</Link>
+                <Button variant="outline" asChild>
+                  <Link href="/auth/login">Login</Link>
                 </Button>
 
                 <Button asChild>
-                  <Link href="/register">Register</Link>
+                  <Link href="/auth/register">Register</Link>
                 </Button>
               </>
             )}
@@ -176,13 +176,13 @@ const Navbar = () => {
                   ) : (
                     <div className="flex flex-col gap-2">
                       <Button asChild>
-                        <Link href="/login" onClick={() => setOpen(false)}>
+                        <Link href="/auth/login" onClick={() => setOpen(false)}>
                           Login
                         </Link>
                       </Button>
 
                       <Button variant="outline" asChild>
-                        <Link href="/register" onClick={() => setOpen(false)}>
+                        <Link href="/auth/register" onClick={() => setOpen(false)}>
                           Register
                         </Link>
                       </Button>
