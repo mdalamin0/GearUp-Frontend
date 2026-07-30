@@ -5,7 +5,7 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type SearchInputProps = {
   placeholder?: string;
@@ -15,12 +15,18 @@ const SearchInput = ({ placeholder = "Search..." }: SearchInputProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const [value, setValue] = useState("");
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get("searchTerm") ?? "",
+  );
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  //  useEffect(() => {
+  //    setSearchValue(searchParams.get("searchTerm") ?? "");
+  //  }, [searchParams]);
+
   const handleChange = (value: string) => {
-    setValue(value)
+    setSearchValue(value);
     const params = new URLSearchParams(searchParams.toString());
 
     if (debounceRef.current) {
@@ -38,8 +44,32 @@ const SearchInput = ({ placeholder = "Search..." }: SearchInputProps) => {
       router.replace(query ? `${pathname}?${query}` : pathname, {
         scroll: false,
       });
-    }, 400);
+    }, 500);
   };
+
+ 
+
+const handleClear = () => {
+  // Clear input immediately
+  setSearchValue("");
+
+  // Cancel pending debounce
+  if (debounceRef.current) {
+    clearTimeout(debounceRef.current);
+  }
+
+  // Remove search query
+  const params = new URLSearchParams(searchParams.toString());
+
+  params.delete("searchTerm");
+  params.delete("page");
+
+  const query = params.toString();
+
+  router.replace(query ? `${pathname}?${query}` : pathname, {
+    scroll: false,
+  });
+};
 
   return (
     <div className="relative w-full max-w-md">
@@ -49,22 +79,19 @@ const SearchInput = ({ placeholder = "Search..." }: SearchInputProps) => {
       {/* Input */}
       <Input
         onChange={(e) => handleChange(e.target.value)}
-        defaultValue={
-          searchParams.get("searchTerm")
-            ? searchParams.get("searchTerm")?.toString()
-            : ""
-        }
+        value={searchValue}
         placeholder={placeholder}
         className="h-11 pl-10 pr-10"
       />
 
       {/* Clear Button */}
-      {value && (
+      {searchValue && (
         <Button
+          onClick={handleClear}
           type="button"
           variant="ghost"
           size="icon"
-          className="absolute top-1/2 right-1 size-8 -translate-y-1/2"
+          className="absolute top-1.5 right-1 size-8 "
         >
           <X className="size-4" />
         </Button>
