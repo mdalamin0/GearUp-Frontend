@@ -70,7 +70,7 @@ const GearCard = ({ gear }: GearCardProps) => {
           <Button disabled={gear.stock === 0} asChild>
             <Link href={`/gear/${gear.id}`}>
               Rent Now
-              <ArrowRight className="ml-2 size-4" />
+              <ArrowRight className=" size-4" />
             </Link>
           </Button>
         </div>
