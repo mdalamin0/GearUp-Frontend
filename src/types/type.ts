@@ -35,3 +35,35 @@ export interface IGearResponse {
   message: string;
   data: IGear[];
 }
+
+export type TGearDetails = {
+  gear: {
+  id: string;
+  title: string;
+  description: string;
+  specifications: Record<string, string>;
+  brand: string;
+  rentalPrice: string;
+  stock: number;
+  image: string;
+  isFeatured: boolean;
+  featuredAt: string | null;
+  providerId: string;
+  categoryId: string;
+  createdAt: string;
+  updatedAT: string;
+
+  category: {
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAT: string;
+  };
+
+  provider: {
+    id: string;
+    name: string;
+    email: string;
+  };
+};
+  }

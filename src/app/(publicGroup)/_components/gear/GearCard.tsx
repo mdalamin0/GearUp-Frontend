@@ -67,11 +67,11 @@ const GearCard = ({ gear }: GearCardProps) => {
 
         <div className="grid grid-cols-2 gap-3">
           <Button variant="outline" asChild>
-            <Link href={`/gear/${gear.id}`}>Details</Link>
+            <Link href={`gear/${gear.id}`}>Details</Link>
           </Button>
 
           <Button disabled={gear.stock === 0} asChild>
-            <Link href={`/gear/${gear.id}`}>
+            <Link href={`gear/${gear.id}`}>
               Rent Now
               <ArrowRight className=" size-4" />
             </Link>
