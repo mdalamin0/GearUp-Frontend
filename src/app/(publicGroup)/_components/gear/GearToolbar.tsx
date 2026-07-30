@@ -3,6 +3,7 @@ import BrandFilter from "./BrandFilter";
 import CategoryTabs, { TCategory } from "./CategoryTabs";
 import PriceFilter from "./PriceFilter";
 import SortDropdown from "./SortDropdown";
+import AvailabilityFilter from "./AvailabilityFilter";
 
 type GearToolbarProps = {
   categories: TCategory[];
@@ -31,10 +32,11 @@ const GearToolbar = ({ categories, brands }: GearToolbarProps) => {
           <SearchInput placeholder="Search Gears..." />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:w-auto">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 lg:w-auto">
           <BrandFilter brands={brands} />
           <PriceFilter />
           <SortDropdown />
+          <AvailabilityFilter/>
         </div>
       </div>
     </section>

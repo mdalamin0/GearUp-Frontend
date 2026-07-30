@@ -4,7 +4,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import { FaFacebook, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import {  FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const quickLinks = [
@@ -15,9 +15,9 @@ const quickLinks = [
 ];
 
 const exploreLinks = [
-  { label: "Camping", href: "/gear?category=Camping" },
-  { label: "Cycling", href: "/gear?category=Cycling" },
-  { label: "Water Sports", href: "/gear?category=Water Sports" },
+  { label: "Camping", href: "/gears?category=Camping" },
+  { label: "Cycling", href: "/gears?category=Cycling" },
+  { label: "Water Sports", href: "/gears?category=Water Sports" },
 ];
 
 const supportLinks = [
