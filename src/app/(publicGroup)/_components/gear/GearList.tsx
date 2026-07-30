@@ -12,13 +12,15 @@ const GearList = async ({
 
     if (!gears.data.data.length) {
       return (
-        <div className="flex min-h-72 items-center justify-center rounded-3xl border border-dashed">
-          <div className="text-center">
-            <h3 className="text-xl font-semibold">No gear available</h3>
+        <div className="section">
+          <div className="flex min-h-72 items-center justify-center rounded-3xl border border-dashed">
+            <div className="text-center">
+              <h3 className="text-xl font-semibold">No gear available</h3>
 
-            <p className="mt-2 text-muted-foreground">
-              Please check back later.
-            </p>
+              <p className="mt-2 text-muted-foreground">
+                Please check back later.
+              </p>
+            </div>
           </div>
         </div>
       );

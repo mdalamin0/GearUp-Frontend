@@ -8,12 +8,14 @@ export const getGears = async ({
   query?: { [key: string]: string | string[] | undefined };
 }) => {
   const params = new URLSearchParams();
-  console.log("query", query);
-  console.log(params, "params");
-
+  
   if (query && query.searchTerm) {
     params.set("searchTerm", query.searchTerm as string);
   }
+  if (query && query.category) {
+    params.set("category", query.category as string);
+  }
+ 
   const res = await fetch(`${api}/api/gears?${params.toString()}`, {
     cache: "force-cache",
     next: {
