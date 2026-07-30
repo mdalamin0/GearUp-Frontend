@@ -28,7 +28,7 @@ const GearToolbar = ({ categories, brands }: GearToolbarProps) => {
 
       {/* Filters */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
-        <div className="flex-1">
+        <div className="flex-1 ">
           <SearchInput placeholder="Search Gears..." />
         </div>
 

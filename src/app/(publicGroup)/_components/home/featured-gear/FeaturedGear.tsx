@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import FeaturedGearList from "./FeaturedGearList";
-import GearGridSkeleton from "../../gear/GearGridSkeleton";
+import GearGridSkeleton from "../../gear/skeleton/GearGridSkeleton";
 
 const FeaturedGear = () => {
   return (

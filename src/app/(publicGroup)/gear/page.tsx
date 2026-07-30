@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import GearGridSkeleton from "../_components/gear/GearGridSkeleton";
+import GearGridSkeleton from "../_components/gear/skeleton/GearGridSkeleton";
 import GearList from "../_components/gear/GearList";
 import GearToolbar from "../_components/gear/GearToolbar";
 import { getCategories } from "../_actions/gear/getCategories";

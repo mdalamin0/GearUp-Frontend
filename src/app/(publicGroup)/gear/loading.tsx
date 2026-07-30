@@ -1,4 +1,4 @@
-import GearGridSkeleton from "../_components/gear/GearGridSkeleton";
+import GearGridSkeleton from "../_components/gear/skeleton/GearGridSkeleton";
 
 const Loading = () => {
   return <GearGridSkeleton />;

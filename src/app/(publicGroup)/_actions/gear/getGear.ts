@@ -11,6 +11,7 @@ import { api } from "@/services/api";
    "minPrice",
    "maxPrice",
    "available",
+   "page"
  ] as const;
 
 export const getGears = async ({
