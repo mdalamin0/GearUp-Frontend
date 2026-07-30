@@ -6,10 +6,10 @@ import SortDropdown from "./SortDropdown";
 
 type GearToolbarProps = {
   categories: TCategory[];
+  brands: string[];
 };
 
-const GearToolbar = async ({ categories }: GearToolbarProps) => {
-  // console.log("category", categories);
+const GearToolbar = ({ categories, brands }: GearToolbarProps) => {
   return (
     <section className="space-y-8">
       {/* Heading */}
@@ -32,7 +32,7 @@ const GearToolbar = async ({ categories }: GearToolbarProps) => {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:w-auto">
-          <BrandFilter />
+          <BrandFilter brands={brands} />
           <PriceFilter />
           <SortDropdown />
         </div>

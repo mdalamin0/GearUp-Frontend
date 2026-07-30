@@ -2,20 +2,33 @@
 
 import { api } from "@/services/api";
 
+ const queryKeys = [
+   "searchTerm",
+   "category",
+   "sortBy",
+   "sortOrder",
+   "brand",
+   "minPrice",
+   "maxPrice",
+   "available",
+ ] as const;
+
 export const getGears = async ({
   query,
 }: {
   query?: { [key: string]: string | string[] | undefined };
 }) => {
   const params = new URLSearchParams();
-  
-  if (query && query.searchTerm) {
-    params.set("searchTerm", query.searchTerm as string);
-  }
-  if (query && query.category) {
-    params.set("category", query.category as string);
-  }
- 
+
+
+  queryKeys.forEach((key) => {
+    const value = query?.[key];
+
+    if (value) {
+      params.set(key, String(value));
+    }
+  });
+
   const res = await fetch(`${api}/api/gears?${params.toString()}`, {
     cache: "force-cache",
     next: {

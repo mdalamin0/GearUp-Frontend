@@ -39,7 +39,10 @@ const GearCard = ({ gear }: GearCardProps) => {
       {/* Content */}
 
       <div className="space-y-5 p-5">
-        <Badge variant="secondary">{gear.category.name}</Badge>
+        <div className="flex justify-between items-center">
+          <Badge variant="secondary">{gear.category.name}</Badge>
+          <Badge variant="outline">Brand: {gear.brand}</Badge>
+        </div>
 
         <div>
           <h3 className="line-clamp-1 text-xl font-semibold">{gear.title}</h3>
