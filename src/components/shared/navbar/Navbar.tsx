@@ -3,14 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LogOut, Menu, UserRound } from "lucide-react";
+import {
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  SettingsIcon,
+  UserIcon,
+  UserRound,
+} from "lucide-react";
 
 import { ModeToggle } from "@/components/shared/navbar/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -21,30 +30,45 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { NavbarProps } from "@/types/type";
+import { toast } from "sonner";
+import { logout } from "@/services/logout";
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Browse Gear", href: "/gear" },
   { label: "About", href: "/about" },
 ];
+const userMenuItems = [
+  { label: "Dashboard", icon: LayoutDashboard, action: "dashboard" },
+  { label: "Profile", icon: UserIcon, action: "profile" },
+  { label: "Settings", icon: SettingsIcon, action: "settings" },
+];
 
-const Navbar = () => {
+const Navbar = ({ user }: NavbarProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
 
-  /**
-   * TODO:
-   * Replace with Auth Context
-   */
-  // const user = "alamin@gmail.com";
-  const user = null;
 
-  const handleLogout = async () => {
-    // TODO: Logout API
+  const handleUserMenuAction = async (action: string) => {
+    if (action === "dashboard") {
+      if (user.data.role === "USER") {
+        router.push("/dashboard");
+      } else if (user.data.role === "AUTHOR") {
+        router.push("/author-dashboard");
+      } else if (user.data.role === "ADMIN") {
+        router.push("/admin-dashboard");
+      }
+      return;
+    }
 
-    router.push("/login");
+    if (action === "logout") {
+      await logout();
+      toast.success("User logged out successfully!");
+      router.push("/auth/login");
+    }
   };
 
   return (
@@ -83,7 +107,7 @@ const Navbar = () => {
           <ModeToggle />
 
           <div className="hidden items-center gap-2 lg:flex">
-            {user ? (
+            {user.success ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button size="icon" variant="outline">
@@ -92,23 +116,45 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end" className="w-52">
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard">Dashboard</Link>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem asChild>
-                    <Link href="/profile">Profile</Link>
-                  </DropdownMenuItem>
+                  <DropdownMenuLabel>
+                    <span className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-foreground">
+                        {user.data?.name}
+                      </span>
+                      <span className="text-xs font-normal text-muted-foreground">
+                        {user.data?.email}
+                      </span>
+                    </span>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    {userMenuItems.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <DropdownMenuItem
+                          key={item.action}
+                          onClick={() => handleUserMenuAction(item.action)}
+                        >
+                          <Icon />
+                          <span>{item.label}</span>
+                        </DropdownMenuItem>
+                      );
+                    })}
+                  </DropdownMenuGroup>
 
                   <DropdownMenuSeparator />
 
-                  <DropdownMenuItem
-                    onClick={handleLogout}
-                    className="text-destructive focus:text-destructive"
-                  >
-                    <LogOut className="mr-2 size-4" />
-                    Logout
-                  </DropdownMenuItem>
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem
+                      variant="destructive"
+                      onClick={async () => {
+                        await handleUserMenuAction("logout");
+                      }}
+                    >
+                      <LogOut />
+                      <span>Log out</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
@@ -157,7 +203,7 @@ const Navbar = () => {
                 ))}
 
                 <div className="mt-4 border-t pt-4">
-                  {user ? (
+                  {user.success ? (
                     <div className="flex flex-col gap-2">
                       <Button
                         variant="outline"
@@ -169,7 +215,12 @@ const Navbar = () => {
                         Dashboard
                       </Button>
 
-                      <Button variant="destructive" onClick={handleLogout}>
+                      <Button
+                        variant="destructive"
+                        onClick={async () => {
+                          await handleUserMenuAction("logout");
+                        }}
+                      >
                         Logout
                       </Button>
                     </div>
@@ -182,7 +233,10 @@ const Navbar = () => {
                       </Button>
 
                       <Button variant="outline" asChild>
-                        <Link href="/auth/register" onClick={() => setOpen(false)}>
+                        <Link
+                          href="/auth/register"
+                          onClick={() => setOpen(false)}
+                        >
                           Register
                         </Link>
                       </Button>

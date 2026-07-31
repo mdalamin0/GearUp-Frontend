@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const RegisterBanner = () => {
   return (
-    <div className="relative hidden lg:block overflow-hidden ">
+    <div className=" hidden lg:block overflow-hidden ">
       <Image
         src="/images/auth/auth-banner.png"
         alt="GearUp"
@@ -11,8 +11,6 @@ const RegisterBanner = () => {
         loading="eager"
         className="w-full h-full object-cover object-left"
       />
-
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/20 to-transparent" />
     </div>
   );
 };

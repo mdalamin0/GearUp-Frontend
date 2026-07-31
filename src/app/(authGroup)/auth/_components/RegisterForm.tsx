@@ -42,7 +42,6 @@ const RegisterForm = () => {
 
   const onSubmit = async (data: RegisterSchemaType) => {
     const res = await registerUser(data);
-    console.log(res, "res");
 
     if (res.success) {
       toast.success(res.message);

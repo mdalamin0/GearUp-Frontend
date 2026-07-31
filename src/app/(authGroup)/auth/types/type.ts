@@ -4,3 +4,8 @@ export type TRegisterPayload = {
   password: string;
   role?: "CUSTOMER" | "PROVIDER";
 };
+
+export type TLoginPayload = {
+  email: string;
+  password: string;
+};
