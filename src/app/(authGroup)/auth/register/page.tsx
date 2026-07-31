@@ -8,16 +8,19 @@ import { FaArrowLeft } from "react-icons/fa6";
 const RegisterPage = () => {
   return (
     <main className="min-h-screen bg-muted/20">
-      <Button variant="ghost" asChild>
-        <Link href="/"> <FaArrowLeft/> Back to Home</Link>
-      </Button>
-      <section className="container flex min-h-screen items-center py-10">
-        
-        <div className="grid w-full overflow-hidden rounded-3xl border bg-background shadow-xl lg:grid-cols-2">
-          
-          <RegisterBanner />
+      <section className="container pt-10">
+        <Button variant="ghost" asChild>
+          <Link href="/">
+            {" "}
+            <FaArrowLeft /> Back to Home
+          </Link>
+        </Button>
+        <div className=" flex min-h-screen items-center pb-10">
+          <div className="grid w-full overflow-hidden rounded-3xl border bg-background shadow-xl lg:grid-cols-2">
+            <RegisterBanner />
 
-          <RegisterForm />
+            <RegisterForm />
+          </div>
         </div>
       </section>
     </main>
