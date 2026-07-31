@@ -3,10 +3,8 @@
 import { api } from "@/services/api";
 import { TLoginPayload } from "../types/type";
 import { cookies } from "next/headers";
-import jwt, { JwtPayload } from "jsonwebtoken";
-import { redirect } from "next/navigation";
 
-export const loginUser = async ( payload: TLoginPayload) => {
+export const loginUser = async (redirectTo: string, payload: TLoginPayload) => {
   try {
     const res = await fetch(`${api}/api/auth/login`, {
       method: "POST",
@@ -31,25 +29,7 @@ export const loginUser = async ( payload: TLoginPayload) => {
         sameSite: "lax",
       });
 
-      const decodedToken = jwt.decode(result.data.accessToken) as JwtPayload;
-      // if (
-      //   redirectTo &&
-      //   typeof redirectTo === "string" &&
-      //   redirectTo.startsWith("/") &&
-      //   !redirectTo.startsWith("//")
-      // ) {
-      //   redirect(redirectTo);
-      // }
-
-      // if (decodedToken.role === "CUSTOMER") {
-      //   redirect("/dashboard/customer");
-      // } else if (decodedToken.role === "ADMIN") {
-      //   redirect("/dashboard/admin");
-      // } else if (decodedToken.role === "PROVIDER") {
-      //   redirect("/dashboard/provider");
-      // }
     }
-console.log(result);
     return result;
   } catch (error) {
     return {

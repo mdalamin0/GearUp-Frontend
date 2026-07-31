@@ -33,7 +33,7 @@ const CtaBanner = () => {
                 variant="outline"
                 className="h-12 border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary"
               >
-                <Link href="/register">Become a Provider</Link>
+                <Link href="/auth/register">Become a Provider</Link>
               </Button>
             </div>
           </div>

@@ -41,7 +41,7 @@ const Hero = () => {
               </Button>
 
               <Button variant="outline" size="lg" asChild>
-                <Link href="/register">Become a Provider</Link>
+                <Link href="/auth/register">Become a Provider</Link>
               </Button>
             </div>
 

@@ -12,11 +12,15 @@ import { loginSchema, LoginSchemaType } from "../schema/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "../_actions/login";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") ?? "";
+
   const {
     register,
     handleSubmit,
@@ -32,15 +36,31 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
-      const res = await loginUser(data);
-    
-        if (res.success) {
-          toast.success(res.message);
-          reset();
-          
-        } else {
-          toast.error(res.message);
-        }
+    const res = await loginUser(redirectTo, data);
+
+    if (res.success) {
+      toast.success(res.message);
+      const decodedToken = jwt.decode(res.data.accessToken) as JwtPayload;
+      reset();
+      if (
+        redirectTo &&
+        typeof redirectTo === "string" &&
+        redirectTo.startsWith("/") &&
+        !redirectTo.startsWith("//")
+      ) {
+        router.push(redirectTo);
+      }
+
+      if (decodedToken.role === "CUSTOMER") {
+        router.push("/dashboard/customer");
+      } else if (decodedToken.role === "PROVIDER") {
+        router.push("/dashboard/provider");
+      } else if (decodedToken.role === "ADMIN") {
+        router.push("/dashboard/admin");
+      }
+    } else {
+      toast.error(res.message);
+    }
   };
   return (
     <div className="flex items-center justify-center p-8 lg:p-14">

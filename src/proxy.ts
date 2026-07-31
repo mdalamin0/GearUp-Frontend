@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtUtils } from "./utils/jwt";
@@ -9,30 +8,26 @@ const PUBLIC_ROUTES = ["/", "/gear"];
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-  const refreshToken = cookieStore.get("refreshToken")?.value;
+  const accessToken = request.cookies.get("accessToken")?.value;
 
   const decodedAccessToken = accessToken
     ? jwtUtils.verifyToken(accessToken, process.env.JWT_ACCESS_SECRET as string)
     : null;
 
-  const decodedRefreshToken = refreshToken
-    ? jwtUtils.verifyToken(
-        refreshToken,
-        process.env.JWT_REFRESH_SECRET as string,
-      )
-    : null;
 
-  let role = null;
+   let role: string | null = null;
 
-  if (!decodedAccessToken?.success) {
-    //token has expired or is invalid, clear the cookies
-    cookieStore.delete("accessToken");
-  }
 
   if (decodedAccessToken?.success && decodedAccessToken.data) {
     role = (decodedAccessToken.data as JwtPayload).role;
+  } else {
+    // Invalid / Expired Token
+    const response = NextResponse.redirect(new URL("/auth/login", request.url));
+
+    response.cookies.delete("accessToken");
+    response.cookies.delete("refreshToken");
+
+    // return response;
   }
 
   if (accessToken && AUTH_ROUTES.includes(pathname)) {
