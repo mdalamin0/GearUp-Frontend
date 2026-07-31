@@ -37,7 +37,6 @@ const LoginForm = () => {
         if (res.success) {
           toast.success(res.message);
           reset();
-          router.push("/")
           
         } else {
           toast.error(res.message);

@@ -1,5 +1,4 @@
-import { LucideProps } from "lucide-react";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+
 
 export interface ICategory {
   id: string;

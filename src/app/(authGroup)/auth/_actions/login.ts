@@ -42,15 +42,14 @@ export const loginUser = async ( payload: TLoginPayload) => {
       // }
 
       // if (decodedToken.role === "CUSTOMER") {
-      //   redirect("/customer-dashboard");
+      //   redirect("/dashboard/customer");
       // } else if (decodedToken.role === "ADMIN") {
-      //   redirect("/admin-dashboard");
+      //   redirect("/dashboard/admin");
       // } else if (decodedToken.role === "PROVIDER") {
-      //   redirect("/provider-dashboard");
+      //   redirect("/dashboard/provider");
       // }
-      // redirect("/")
     }
-
+console.log(result);
     return result;
   } catch (error) {
     return {
