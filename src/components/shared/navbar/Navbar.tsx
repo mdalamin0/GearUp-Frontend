@@ -54,12 +54,12 @@ const Navbar = ({ user }: NavbarProps) => {
 
   const handleUserMenuAction = async (action: string) => {
     if (action === "dashboard") {
-      if (user.data.role === "USER") {
-        router.push("/dashboard");
-      } else if (user.data.role === "AUTHOR") {
-        router.push("/author-dashboard");
+      if (user.data.role === "CUSTOMER") {
+        router.push("/dashboard/customer");
+      } else if (user.data.role === "PROVIDER") {
+        router.push("/dashboard/provider");
       } else if (user.data.role === "ADMIN") {
-        router.push("/admin-dashboard");
+        router.push("/dashboard/admin");
       }
       return;
     }

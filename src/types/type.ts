@@ -1,3 +1,6 @@
+import { LucideProps } from "lucide-react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
 export interface ICategory {
   id: string;
   name: string;
@@ -72,17 +75,22 @@ type IUser = {
   success: boolean;
   message: string;
   data: {
-      id: string;
-      name: string;
-      email: string;
-      status: string;
-      role: string;
-      createdAt: string;
-      updatedAt: string;
-    };
+    id: string;
+    name: string;
+    email: string;
+    status: string;
+    role: string;
+    createdAt: string;
+    updatedAt: string;
   };
-
+};
 
 export type NavbarProps = {
   user: IUser;
+};
+
+export type ISidebarItem = {
+  title: string;
+  href: string;
+  icon: React.ElementType;
 };
