@@ -6,8 +6,10 @@ const RegisterBanner = () => {
       <Image
         src="/images/auth/auth-banner.png"
         alt="GearUp"
-        fill
-        className="object-cover object-left"
+        width={700}
+        height={700}
+        loading="eager"
+        className="w-full h-full object-cover object-left"
       />
 
       <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/20 to-transparent" />
