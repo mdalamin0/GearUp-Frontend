@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ICategory {
   id: string;
   name: string;
@@ -34,7 +35,7 @@ export type TRentalStatus =
   | "RETURNED"
   | "CANCELLED"
   | "FAILED";
-  
+
 export interface IRental {
   id: string;
   customerId: string;
@@ -47,4 +48,47 @@ export interface IRental {
   createdAt: string;
   updatedAT: string;
   gearItem: IGearItem;
+}
+
+export type IPaymentStatus = "PAID" | "FAILED" | "PENDING" | "CANCELLED";
+
+export interface IPayment {
+  id: string;
+  orderId: string;
+  transactionId: string;
+  amount: string;
+  method: string;
+  gateway: string;
+  paidAt: string;
+
+  meta: Record<string, any>; 
+
+  status: IPaymentStatus;
+
+  createdAt: string;
+  updatedAt: string;
+
+  order: {
+    id: string;
+    customerId: string;
+    gearItemId: string;
+    quantity: number;
+    totalAmount: string;
+    status: TRentalStatus;
+    startDate: string;
+    endDate: string;
+
+    gearItem: {
+      id: string;
+      title: string;
+      image: string;
+      brand: string;
+      rentalPrice: string;
+
+      category?: {
+        id: string;
+        name: string;
+      };
+    };
+  };
 }

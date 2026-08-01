@@ -24,7 +24,7 @@ export const sidebarMenuItems = {
     },
     {
       title: "Payment History",
-      href: "/dashboard/customer/payments",
+      href: "/dashboard/customer/payment-history",
       icon: CreditCard,
     },
     {

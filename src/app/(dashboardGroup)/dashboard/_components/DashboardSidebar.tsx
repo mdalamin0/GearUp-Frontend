@@ -32,7 +32,7 @@ const DashboardSidebar = ({ user }: NavbarProps) => {
 
       <div className="border-b px-6 py-6">
         <div className="flex items-center gap-4">
-          <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
+          <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-foreground">
             {user.data.name.charAt(0).toUpperCase()}
           </div>
 
