@@ -18,7 +18,7 @@ const GearGallery = ({gear}: TGearDetails) => {
       </div>
 
       {/* Thumbnail Images */}
-      <div className="grid grid-cols-4 gap-3">
+      {/* <div className="grid grid-cols-4 gap-3">
         {[
           "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4",
           "https://images.unsplash.com/photo-1522163182402-834f871fd851",
@@ -38,7 +38,7 @@ const GearGallery = ({gear}: TGearDetails) => {
             />
           </button>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

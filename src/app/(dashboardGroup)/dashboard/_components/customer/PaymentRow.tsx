@@ -41,7 +41,7 @@ const PaymentRow = ({ payment }: Props) => {
         <CopyTransaction transactionId={payment.transactionId} />
       </TableCell>
 
-      <TableCell>৳{payment.amount}</TableCell>
+      <TableCell>${payment.amount}</TableCell>
 
       <TableCell> {format(new Date(payment.paidAt), "dd MMM yyyy")}</TableCell>
 

@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarX2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getRentalOrders } from "../../_actions/customer/getRentalOrder";
 import { format } from "date-fns";
 import { IRental } from "../../types/type";
 import { rentalStatusConfig } from "@/utils/rental-status";
+import EmptyState from "../shared/EmptyState";
 
 const RecentRentals = async () => {
   const rentals: IRental[] = await getRentalOrders();
@@ -57,9 +58,13 @@ const RecentRentals = async () => {
         })}
 
         {rentals.length === 0 && (
-          <div className="rounded-xl border border-dashed py-10 text-center">
-            <p className="text-muted-foreground">No rental history found.</p>
-          </div>
+          <EmptyState
+            icon={CalendarX2}
+            title="No rentals history found!"
+            description="Start renting outdoor gear to see your recent activity."
+            buttonLabel="Browse Gear"
+            buttonHref="/gear"
+          />
         )}
       </div>
     </section>

@@ -9,11 +9,24 @@ import {
 import RentalRow from "./RentalRow";
 import RentalCard from "./RentalCard";
 import { IRental } from "../../types/type";
+import EmptyState from "../shared/EmptyState";
+import { PackageSearch } from "lucide-react";
 type Props = {
   rentals: IRental[];
 };
 
 const RentalTable = ({ rentals }: Props) => {
+  if (rentals.length === 0) {
+    return (
+      <EmptyState
+        icon={PackageSearch}
+        title="No Rentals Found"
+        description="You haven't rented any outdoor gear yet."
+        buttonLabel="Browse Gear"
+        buttonHref="/gear"
+      />
+    );
+  }
   return (
     <>
       {/* Mobile */}

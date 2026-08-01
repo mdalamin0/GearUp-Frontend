@@ -1,32 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TGearDetails } from "@/types/type";
 
-const specifications = [
-  {
-    label: "Brand",
-    value: "Coleman",
-  },
-  {
-    label: "Category",
-    value: "Camping",
-  },
-  {
-    label: "Capacity",
-    value: "4 Person",
-  },
-  {
-    label: "Weight",
-    value: "3.2 kg",
-  },
-  {
-    label: "Material",
-    value: "Waterproof Polyester",
-  },
-  {
-    label: "Color",
-    value: "Green",
-  },
-];
 
 const Specifications = ({gear}: TGearDetails) => {
   return (

@@ -70,7 +70,7 @@ export type TGearDetails = {
   };
 };
 
-type IUser = {
+export type IUser = {
   success: boolean;
   message: string;
   data: {

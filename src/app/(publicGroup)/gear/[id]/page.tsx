@@ -16,20 +16,22 @@ const GearDetails = async({ params }: { params: Promise<{ id: string }> }) => {
     <section className="container py-12 space-y-12">
       <Button variant={"ghost"}>
         {" "}
-        <Link href={"/gear"} className='flex items-center gap-2'>
+        <Link href={"/gear"} className="flex items-center gap-2">
           <FaArrowLeft /> Back to Gears
         </Link>
       </Button>
 
-      <div className="grid gap-12 lg:grid-cols-12 ">
-        <div className="lg:col-span-7 space-y-16">
+      <div className="grid gap-12 md:grid-cols-12 ">
+        <div className="md:col-span-7 space-y-16">
           <GearGallery gear={gear} />
-          <Specifications gear={gear} />
+            <Specifications gear={gear} />
         </div>
 
-        <div className="space-y- lg:col-span-5">
+        <div className=" md:col-span-5">
           <GearInfo gear={gear} />
           <RentCard gear={gear} />
+            {/* <Specifications gear={gear} /> */}
+          
         </div>
       </div>
 
