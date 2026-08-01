@@ -2,20 +2,15 @@
 
 import { cookies } from "next/headers";
 import { api } from "@/services/api";
+import { TReviewPayload } from "../../types/type";
+import { revalidateTag } from "next/cache";
 
-type TRentalPayload = {
-  gearItemId: string;
-  quantity: number;
-  startDate: string;
-  endDate: string;
-};
-
-export const createRentalOrder = async (payload: TRentalPayload) => {
+export const createReview = async (payload: TReviewPayload) => {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value;
 
-  const res = await fetch(`${api}/api/rentals`, {
+  const res = await fetch(`${api}/api/reviews`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,12 +20,13 @@ export const createRentalOrder = async (payload: TRentalPayload) => {
   });
 
   const data = await res.json();
-
- 
-
-  if (!data.success) {
-    throw new Error(data.message || "Failed to create rental order.");
+  if (data.success) {
+    revalidateTag("reviews", { expire: 0 });
   }
 
-  return data.data;
+  if (!data.success) {
+    throw new Error(data.message || "Failed to submit review.");
+  }
+
+  return data;
 };

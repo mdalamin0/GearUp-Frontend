@@ -50,9 +50,9 @@ const GearCard = ({ gear }: GearCardProps) => {
           <div className="mt-2 flex items-center gap-1">
             <Star className="size-4 fill-yellow-400 text-yellow-400" />
 
-            <span className="text-sm font-medium">4.9</span>
+            <span className="text-sm font-medium">{gear.averageRating}</span>
 
-            <span className="text-sm text-muted-foreground">(124 Reviews)</span>
+            <span className="text-sm text-muted-foreground">({gear.reviewCount} Reviews)</span>
           </div>
         </div>
 

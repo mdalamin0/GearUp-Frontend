@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { IRental } from "../../types/type";
+import PaymentButton from "./PaymentButton";
+import ReviewDialog from "../review/ReviewDialog";
 
 type Props = {
   rental: IRental;
@@ -8,30 +10,22 @@ type Props = {
 
 const RentalActionButton = ({ rental }: Props) => {
   if (rental.status === "CONFIRMED") {
-    return (
-      <Button asChild size="sm">
-        <Link href={`/dashboard/customer/orders/${rental.id}/pay`}>
-          Pay Now
-        </Link>
-      </Button>
-    );
+    return <PaymentButton orderId={rental.id} title="Pay Now" />;
   }
 
   if (rental.status === "RETURNED") {
-    return (
-      <Button variant="outline" size="sm">
-        Leave Review
-      </Button>
-    );
+    return <ReviewDialog gearId={rental.gearItem.id} />;
   }
 
-  if (rental.status === "FAILED") {
-    return (
-      <Button variant="destructive" size="sm">
-        Retry Payment
-      </Button>
-    );
-  }
+ if (rental.status === "FAILED") {
+   return (
+     <PaymentButton
+       orderId={rental.id}
+       title="Retry Payment"
+       variant="destructive"
+     />
+   );
+ }
 
   if (rental.status === "PAID") {
     return (

@@ -11,11 +11,7 @@ export const getPayments = async () => {
     headers: {
       Cookie: `accessToken=${accessToken}`,
     },
-    cache: "force-cache",
-    next: {
-      revalidate: 60 * 60 * 24,
-      tags: ["payments"],
-    },
+    cache: "no-store",
   });
 
   const data = await res.json();

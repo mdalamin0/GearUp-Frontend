@@ -12,11 +12,7 @@ export const getRentalOrders = async (): Promise<IRental[]> => {
     headers: {
       Cookie: `accessToken=${accessToken}`,
     },
-    cache: "force-cache",
-    next: {
-      revalidate: 60 * 60 * 24,
-      tags: ["rental-orders"],
-    },
+    cache: "no-store",
   });
 
   const data = await res.json();

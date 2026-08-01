@@ -3,6 +3,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const PaymentSuccessPage = () => {
+  
   return (
     <main className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-lg rounded-3xl border bg-background p-8 text-center shadow-sm">

@@ -30,6 +30,8 @@ export interface IGear {
   updatedAT: string;
 
   category: ICategory;
+  reviewCount: number;
+  averageRating: number;
 }
 
 export interface IGearResponse {

@@ -92,3 +92,10 @@ export interface IPayment {
     };
   };
 }
+
+
+export type TReviewPayload = {
+  gearItemId: string;
+  rating: number;
+  comment: string;
+};
