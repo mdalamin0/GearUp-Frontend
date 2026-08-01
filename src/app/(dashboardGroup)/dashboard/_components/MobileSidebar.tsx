@@ -58,7 +58,7 @@ const MobileSidebar = ({ user }: NavbarProps) => {
         <div className="space-y-2 p-5">
           {navItems.map((item) => {
             const active =
-              pathname === item.href || pathname.startsWith(item.href + "/");
+              pathname === item.href ;
 
             return (
               <Link

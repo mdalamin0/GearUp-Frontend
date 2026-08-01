@@ -1,0 +1,50 @@
+export interface ICategory {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAT: string;
+}
+
+export interface IGearItem {
+  id: string;
+  title: string;
+  description: string;
+  specifications: {
+    length: string;
+    maxLoad: string;
+  };
+  brand: string;
+  rentalPrice: string;
+  stock: number;
+  image: string;
+  isFeatured: boolean;
+  featuredAt: string | null;
+  providerId: string;
+  categoryId: string;
+  createdAt: string;
+  updatedAT: string;
+  category: ICategory;
+}
+
+export type TRentalStatus =
+  | "PLACED"
+  | "CONFIRMED"
+  | "PAID"
+  | "PICKED_UP"
+  | "RETURNED"
+  | "CANCELLED"
+  | "FAILED";
+  
+export interface IRental {
+  id: string;
+  customerId: string;
+  gearItemId: string;
+  quantity: number;
+  totalAmount: string;
+  status: TRentalStatus;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
+  updatedAT: string;
+  gearItem: IGearItem;
+}
