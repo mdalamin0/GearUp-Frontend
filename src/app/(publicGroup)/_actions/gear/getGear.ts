@@ -33,7 +33,7 @@ export const getGears = async ({
   const res = await fetch(`${api}/api/gears?${params.toString()}`, {
     cache: "force-cache",
     next: {
-      revalidate: 60,
+      revalidate: 60 * 60 * 24,
       tags: ["gears"],
     },
   });

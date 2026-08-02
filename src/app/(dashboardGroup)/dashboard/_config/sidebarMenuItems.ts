@@ -41,11 +41,6 @@ export const sidebarMenuItems = {
       icon: LayoutDashboard,
     },
     {
-      title: "My Gear",
-      href: "/dashboard/provider/gear",
-      icon: Package,
-    },
-    {
       title: "Add Gear",
       href: "/dashboard/provider/gear/new",
       icon: PlusCircle,

@@ -3,6 +3,7 @@
 
 import { api } from "@/services/api";
 import { TRegisterPayload } from "../types/type";
+import { revalidateTag } from "next/cache";
 
 export const registerUser = async (payload: TRegisterPayload) => {
   try {
@@ -15,6 +16,9 @@ export const registerUser = async (payload: TRegisterPayload) => {
     });
 
     const result = await res.json();
+    if (result.success) {
+      revalidateTag("admin-users", { expire: 0 });
+    }
 
     return result;
   } catch (error: any) {

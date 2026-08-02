@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Pencil } from "lucide-react";
 
 import {
   Dialog,
@@ -12,10 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Button } from "@/components/ui/button";
-
 import GearForm from "./GearForm";
-
 import { ICategory } from "../../types/type";
 import { IGear } from "@/types/type";
 

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import { Loader2, Pencil, Trash2 } from "lucide-react";
+import { Loader2,  Trash2 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
