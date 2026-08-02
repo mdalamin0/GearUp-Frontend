@@ -5,14 +5,14 @@ import { api } from "@/services/api";
 import { cookies } from "next/headers";
 import { TGearPayload } from "../../types/type";
 
-export const createGear = async (payload: TGearPayload) => {
+
+export const updateGear = async (gearId: string, payload: TGearPayload) => {
   try {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
 
-    const res = await fetch(`${api}/api/provider/gear`, {
-      method: "POST",
-
+    const res = await fetch(`${api}/api/provider/gear/${gearId}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Cookie: `accessToken=${accessToken}`,

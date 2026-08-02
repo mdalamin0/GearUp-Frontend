@@ -13,7 +13,7 @@ const AddNewGearPage = async() => {
         </p>
       </div>
 
-      <GearForm  categories={categories}/>
+      <GearForm categories={categories} mode="create" />
     </div>
   );
 };

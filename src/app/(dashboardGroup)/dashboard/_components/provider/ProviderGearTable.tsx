@@ -11,12 +11,14 @@ import ProviderGearRow from "./ProviderGearRow";
 import ProviderGearCard from "./ProviderGearCard";
 import { PackageSearch } from "lucide-react";
 import EmptyState from "../shared/EmptyState";
+import { getCategories } from "@/app/(publicGroup)/_actions/gear/getCategories";
 
 type Props = {
   gears: IGear[];
 };
 
-const ProviderGearTable = ({ gears }: Props) => {
+const ProviderGearTable = async({ gears }: Props) => {
+  const categories = await getCategories();
   if (gears.length === 0) {
     return (
       <EmptyState
@@ -49,7 +51,7 @@ const ProviderGearTable = ({ gears }: Props) => {
 
           <TableBody>
             {gears.map((gear) => (
-              <ProviderGearRow key={gear.id} gear={gear} />
+              <ProviderGearRow key={gear.id} gear={gear} categories={categories} />
             ))}
           </TableBody>
         </Table>
@@ -59,7 +61,7 @@ const ProviderGearTable = ({ gears }: Props) => {
 
       <div className="grid gap-4 md:grid-cols-2 lg:hidden">
         {gears.map((gear) => (
-          <ProviderGearCard key={gear.id} gear={gear} />
+          <ProviderGearCard key={gear.id} gear={gear} categories={categories}/>
         ))}
       </div>
     </>

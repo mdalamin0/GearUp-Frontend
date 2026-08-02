@@ -7,17 +7,19 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import { IGear } from "@/types/type";
+import { ICategory, IGear } from "@/types/type";
 import { useState } from "react";
 import { deleteGear } from "../../_actions/provider/deleteGear";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import EditGearDialog from "./EditGearDialog";
 
 type Props = {
   gear: IGear;
+  categories: ICategory[]
 };
 
-const ProviderGearRow = ({ gear }: Props) => {
+const ProviderGearRow = ({ gear, categories }: Props) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -99,9 +101,18 @@ const ProviderGearRow = ({ gear }: Props) => {
 
       <TableCell className="text-right">
         <div className="flex justify-end gap-2">
-          <Button variant="outline" size="icon">
+          {/* <Button variant="outline" size="icon">
             <Pencil className="size-4" />
-          </Button>
+          </Button> */}
+          <EditGearDialog
+            gear={gear}
+            categories={categories}
+            trigger={
+              <Button size="icon" variant="outline">
+                <Pencil className="size-4" />
+              </Button>
+            }
+          />
 
           <Button
             disabled={loading}

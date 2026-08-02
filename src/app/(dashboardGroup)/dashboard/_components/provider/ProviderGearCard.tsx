@@ -7,17 +7,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import { IGear } from "@/types/type";
+import { ICategory, IGear } from "@/types/type";
 import { toast } from "sonner";
 import { deleteGear } from "../../_actions/provider/deleteGear";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import EditGearDialog from "./EditGearDialog";
 
 type Props = {
   gear: IGear;
+  categories: ICategory[]
 };
 
-const ProviderGearCard = ({ gear }: Props) => {
+const ProviderGearCard = ({ gear, categories }: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const image = gear.image.startsWith("http")
@@ -92,10 +94,15 @@ const ProviderGearCard = ({ gear }: Props) => {
         </div>
 
         <div className="flex gap-3 pt-2">
-          <Button variant="outline" className="flex-1">
-            <Pencil className="mr-1 size-4" />
-            Edit
-          </Button>
+          <EditGearDialog
+            gear={gear}
+            categories={categories}
+            trigger={
+              <Button variant="outline" className="flex-1">
+                Edit
+              </Button>
+            }
+          />
 
           <Button
             disabled={loading}
@@ -110,8 +117,7 @@ const ProviderGearCard = ({ gear }: Props) => {
               </>
             ) : (
               <>
-                <Trash2 className="size-4 mr-1" />{" "}
-                Delete
+                <Trash2 className="size-4 mr-1" /> Delete
               </>
             )}
           </Button>

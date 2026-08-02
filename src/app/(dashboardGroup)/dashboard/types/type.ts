@@ -149,3 +149,20 @@ export interface IProviderOrder {
     updatedAT: string;
   };
 }
+
+
+export type TGearPayload = {
+  title: string;
+  description: string;
+  brand: string;
+  rentalPrice: number;
+  stock: number;
+  image: string;
+  categoryId: string;
+  specifications: {
+    length: string;
+    maxLoad: string;
+    material: string;
+    weight: string;
+  };
+};
