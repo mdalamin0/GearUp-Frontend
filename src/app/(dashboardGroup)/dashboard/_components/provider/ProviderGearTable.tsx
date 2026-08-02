@@ -57,7 +57,7 @@ const ProviderGearTable = ({ gears }: Props) => {
 
       {/* Mobile */}
 
-      <div className="grid gap-4 lg:hidden">
+      <div className="grid gap-4 md:grid-cols-2 lg:hidden">
         {gears.map((gear) => (
           <ProviderGearCard key={gear.id} gear={gear} />
         ))}

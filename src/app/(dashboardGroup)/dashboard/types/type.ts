@@ -103,10 +103,8 @@ export interface IProviderOrder {
   id: string;
   customerId: string;
   gearItemId: string;
-
   quantity: number;
   totalAmount: string;
-
   status:
     | "PLACED"
     | "CONFIRMED"

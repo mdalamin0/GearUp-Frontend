@@ -41,7 +41,6 @@ const navItems = [
 ];
 const userMenuItems = [
   { label: "Dashboard", icon: LayoutDashboard, action: "dashboard" },
-  { label: "Profile", icon: UserIcon, action: "profile" },
   { label: "Settings", icon: SettingsIcon, action: "settings" },
 ];
 
