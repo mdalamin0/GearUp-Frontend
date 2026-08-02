@@ -25,5 +25,5 @@ export const getAllUsers = async () => {
     throw new Error(data.message || "Failed to fetch users.");
   }
 
-  return data.data;
+  return data;
 };

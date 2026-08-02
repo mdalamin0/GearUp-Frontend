@@ -43,7 +43,7 @@ const PaymentCard = ({ payment }: Props) => {
         <div className="flex justify-between">
           <span className="text-muted-foreground">Amount</span>
 
-          <span>৳{payment.amount}</span>
+          <span>${payment.amount}</span>
         </div>
 
         <div className="flex justify-between">

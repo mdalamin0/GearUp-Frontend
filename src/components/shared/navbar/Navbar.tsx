@@ -8,7 +8,6 @@ import {
   LogOut,
   Menu,
   SettingsIcon,
-  UserIcon,
   UserRound,
 } from "lucide-react";
 

@@ -73,6 +73,17 @@ export type TGearDetails = {
 };
 
 export type IUser = {
+    id: string;
+    name: string;
+    email: string;
+    status: string;
+    role: string;
+    createdAt: string;
+    updatedAt: string;
+
+};
+
+ type INavUser = {
   success: boolean;
   message: string;
   data: {
@@ -87,7 +98,7 @@ export type IUser = {
 };
 
 export type NavbarProps = {
-  user: IUser;
+  user: INavUser;
 };
 
 export type ISidebarItem = {
