@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema, RegisterSchemaType } from "../schema/register.schema";
+import { registerSchema, RegisterSchemaType } from "../_schema/register.schema";
 import { cn } from "@/lib/utils";
 import { registerUser } from "../_actions/register";
 import { useRouter } from "next/navigation";

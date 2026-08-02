@@ -6,7 +6,7 @@ export const getFeaturedGears = async () => {
   const res = await fetch(`${api}/api/gears?isFeatured=true&limit=6`, {
     cache: "force-cache",
     next: {
-      revalidate: 60,
+      revalidate: 60 * 60 * 24,
       tags: ["featured-gears"],
     },
   });

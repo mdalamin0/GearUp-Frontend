@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
-import { loginSchema, LoginSchemaType } from "../schema/login.schema";
+import { loginSchema, LoginSchemaType } from "../_schema/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "../_actions/login";
 import { toast } from "sonner";
