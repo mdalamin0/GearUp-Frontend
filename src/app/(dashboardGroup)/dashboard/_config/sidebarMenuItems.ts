@@ -83,5 +83,10 @@ export const sidebarMenuItems = {
       href: "/dashboard/admin/rentals",
       icon: ClipboardList,
     },
+    {
+      title: "Profile",
+      href: "/dashboard/admin/profile",
+      icon: User,
+    },
   ],
 };

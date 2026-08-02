@@ -1,25 +1,23 @@
-import { Search } from "lucide-react";
-
-import { Input } from "@/components/ui/input";
-
-
 
 import { getAllUsers } from "../../_actions/admin/getAllUsers";
 import UserCard from "../../_components/admin/UserCard";
 import UsersTable from "../../_components/admin/UsersTable";
 import { IUser } from "@/types/type";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import SearchInput from "@/components/shared/SearchInput";
+import UsersFilters from "../../_components/admin/UsersFilters";
+import GearPagination from "@/app/(publicGroup)/_components/gear/GearPagination";
 
-
-type SearchParams = Promise<{
-  page?: string;
-  searchTerm?: string;
-}>;
-
-const UsersPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+const UsersPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) => {
   const query = await searchParams;
 
-  const users = await getAllUsers();
+  const users = await getAllUsers({ query });
+  const meta = users.data.meta;
+  const start = (meta.page - 1) * meta.limit + 1;
+  const end = Math.min(meta.page * meta.limit, meta.total);
 
   return (
     <div className="space-y-6">
@@ -39,60 +37,39 @@ const UsersPage = async ({ searchParams }: { searchParams: SearchParams }) => {
         {/* Search */}
 
         <div className="relative w-full max-w-md">
-          <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-
-          <Input
-            placeholder="Search by name or email..."
-            defaultValue={query.searchTerm}
-            className="pl-10"
-          />
+          <SearchInput placeholder="Search by name or email..."></SearchInput>
         </div>
 
         {/* Filters */}
 
         <div className="flex flex-col gap-3 sm:flex-row">
           {/* Role */}
-
-          <Select defaultValue={query.role || "ALL"}>
-            <SelectTrigger className="w-full sm:w-[180px]">
-              <SelectValue placeholder="Role" />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem value="ALL">All Roles</SelectItem>
-              <SelectItem value="CUSTOMER">Customer</SelectItem>
-              <SelectItem value="PROVIDER">Provider</SelectItem>
-            </SelectContent>
-          </Select>
-
-          {/* Status */}
-
-          <Select defaultValue={query.status || "ALL"}>
-            <SelectTrigger className="w-full sm:w-[180px]">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem value="ALL">All Status</SelectItem>
-              <SelectItem value="ACTIVE">Active</SelectItem>
-              <SelectItem value="SUSPENDED">Suspended</SelectItem>
-            </SelectContent>
-          </Select>
+          <UsersFilters></UsersFilters>
         </div>
+      </div>
+      <div className="mb-6 flex items-center justify-between">
+        <p className="text-sm text-muted-foreground">
+          Showing{" "}
+          <span className="font-semibold text-foreground">
+            {start}–{end}
+          </span>{" "}
+          of <span className="font-semibold text-foreground">{meta.total}</span>{" "}
+          users
+        </p>
       </div>
 
       {/* Desktop */}
 
       <div className="hidden lg:block">
-        <UsersTable users={users.data} />
+        <UsersTable users={users.data.data} />
       </div>
 
       {/* Mobile */}
 
       <div className="grid gap-4 lg:hidden">
-        {users.data.length > 0 ? (
+        {users.data.data.length > 0 ? (
           <div className="grid md:grid-cols-2 gap-4">
-            {users.data.map((user: IUser) => (
+            {users.data.data.map((user: IUser) => (
               <UserCard key={user.id} user={user} />
             ))}
           </div>
@@ -105,7 +82,9 @@ const UsersPage = async ({ searchParams }: { searchParams: SearchParams }) => {
 
       {/* Pagination */}
 
-      {/* {users.meta.totalPage > 1 && <Pagination meta={users.meta} />} */}
+      {meta.totalPage > 1 && (
+        <GearPagination currentPage={meta.page} totalPages={meta.totalPage} />
+      )}
     </div>
   );
 };

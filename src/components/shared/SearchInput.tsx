@@ -5,7 +5,7 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 
 type SearchInputProps = {
   placeholder?: string;
@@ -21,9 +21,7 @@ const SearchInput = ({ placeholder = "Search..." }: SearchInputProps) => {
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  //  useEffect(() => {
-  //    setSearchValue(searchParams.get("searchTerm") ?? "");
-  //  }, [searchParams]);
+
 
   const handleChange = (value: string) => {
     setSearchValue(value);

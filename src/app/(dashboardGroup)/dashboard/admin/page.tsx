@@ -28,7 +28,7 @@ const AdminDashboardPage = async () => {
       <section className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 ">
         <StatCard
           title="Total Users"
-          value={users.data.length}
+          value={users.data.meta.total}
           description="Registered platform users"
           icon={Users}
         />

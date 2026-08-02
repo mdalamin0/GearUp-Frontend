@@ -13,6 +13,7 @@ type UserCardProps = {
 };
 
 const UserCard = ({ user }: UserCardProps) => {
+  console.log(user);
   return (
     <Card className="overflow-hidden">
       <CardContent className="space-y-5 p-5">
