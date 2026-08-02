@@ -1,20 +1,53 @@
+"use client";
+
 import Image from "next/image";
-import { Pencil, Trash2 } from "lucide-react";
+import { Loader2, Pencil, Trash2 } from "lucide-react";
 
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { IGear } from "@/types/type";
+import { useState } from "react";
+import { deleteGear } from "../../_actions/provider/deleteGear";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Props = {
   gear: IGear;
 };
 
 const ProviderGearRow = ({ gear }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const image = gear.image.startsWith("http")
     ? gear.image
     : `https://${gear.image}`;
+
+  const handleGearDelete = async () => {
+    try {
+      setLoading(true);
+      await deleteGear(gear.id);
+      toast.success("Gear Deleted successfully");
+      router.refresh();
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message.includes("Foreign key constraint")
+      ) {
+        toast.error(
+          "This gear cannot be deleted because it has rental orders.",
+        );
+      } else {
+        toast.error(
+          error instanceof Error ? error.message : "Something went wrong",
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <TableRow>
@@ -70,8 +103,19 @@ const ProviderGearRow = ({ gear }: Props) => {
             <Pencil className="size-4" />
           </Button>
 
-          <Button variant="destructive" size="icon">
-            <Trash2 className="size-4" />
+          <Button
+            disabled={loading}
+            onClick={handleGearDelete}
+            variant="destructive"
+            size="icon"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="size-4 animate-spin" />
+              </>
+            ) : (
+              <Trash2 className="size-4" />
+            )}
           </Button>
         </div>
       </TableCell>

@@ -1,20 +1,52 @@
+"use client"
+
 import Image from "next/image";
-import { Pencil, Trash2 } from "lucide-react";
+import { Loader2, Pencil, Trash2 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { IGear } from "@/types/type";
+import { toast } from "sonner";
+import { deleteGear } from "../../_actions/provider/deleteGear";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type Props = {
   gear: IGear;
 };
 
 const ProviderGearCard = ({ gear }: Props) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const image = gear.image.startsWith("http")
     ? gear.image
     : `https://${gear.image}`;
+
+      const handleGearDelete = async () => {
+        try {
+          setLoading(true);
+          await deleteGear(gear.id);
+          toast.success("Gear Deleted successfully");
+          router.refresh();
+        } catch (error) {
+          if (
+            error instanceof Error &&
+            error.message.includes("Foreign key constraint")
+          ) {
+            toast.error(
+              "This gear cannot be deleted because it has rental orders.",
+            );
+          } else {
+            toast.error(
+              error instanceof Error ? error.message : "Something went wrong",
+            );
+          }
+        } finally {
+          setLoading(false);
+        }
+      };
 
   return (
     <Card className="overflow-hidden rounded-2xl">
@@ -61,13 +93,27 @@ const ProviderGearCard = ({ gear }: Props) => {
 
         <div className="flex gap-3 pt-2">
           <Button variant="outline" className="flex-1">
-            <Pencil className="mr-2 size-4" />
+            <Pencil className="mr-1 size-4" />
             Edit
           </Button>
 
-          <Button variant="destructive" className="flex-1">
-            <Trash2 className="mr-2 size-4" />
-            Delete
+          <Button
+            disabled={loading}
+            onClick={handleGearDelete}
+            variant="destructive"
+            className="flex-1"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="size-4 mr-1 animate-spin" />
+                Deleting...
+              </>
+            ) : (
+              <>
+                <Trash2 className="size-4 mr-1" />{" "}
+                Delete
+              </>
+            )}
           </Button>
         </div>
       </CardContent>

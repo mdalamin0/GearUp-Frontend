@@ -30,9 +30,7 @@ const ProviderDashboardPage = async () => {
   ).length;
 
   const totalGear = gears.length;
-  // const activeRentals = orders.filter(
-  //   (order) => order.status === "PICKED_UP",
-  // ).length;
+
 
   return (
     <div className="space-y-8">
@@ -79,14 +77,14 @@ const ProviderDashboardPage = async () => {
 
             <StatCard
               title="Active Rentals"
-              value={0}
+              value={activeRentals}
               icon={PackageCheck}
               description="Currently rented by customers"
             />
 
             <StatCard
               title="Pending Orders"
-              value={0}
+              value={pendingOrders}
               icon={Clock3}
               description="Waiting for your confirmation"
             />

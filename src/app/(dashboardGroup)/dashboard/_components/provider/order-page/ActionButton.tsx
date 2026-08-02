@@ -4,54 +4,60 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { IProviderOrder } from "../../../types/type";
+import { updateOrderStatus } from "../../../_actions/provider/updateOrderStatus";
+import { useState } from "react";
 
 type ActionButtonProps = {
   order: IProviderOrder;
 };
 
 const ActionButton = ({ order }: ActionButtonProps) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleStatusUpdate = async (status: string) => {
     try {
-      // await updateOrderStatus(order.id, { status });
-
+      setLoading(true);
+      await updateOrderStatus(order.id, status);
       toast.success("Order updated successfully");
-
       router.refresh();
-    } catch {
-      toast.error("Failed to update order");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Something went wrong",
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   if (order.status === "PLACED") {
     return (
-      <Button size="sm" onClick={() => handleStatusUpdate("CONFIRMED")}>
-        Confirm
+      <Button size="sm" disabled={loading} onClick={() => handleStatusUpdate("CONFIRMED")}>
+        {loading ? "Updating..." : "Confirm"}
       </Button>
     );
   }
 
   if (order.status === "CONFIRMED") {
     return (
-      <Button size="sm" onClick={() => handleStatusUpdate("PICKED_UP")}>
-        Mark Picked Up
+      <Button size="sm" disabled={loading} onClick={() => handleStatusUpdate("PICKED_UP")}>
+        {loading ? "Updating..." : "Mark Picked Up"}
       </Button>
     );
   }
 
   if (order.status === "PAID") {
     return (
-      <Button size="sm" onClick={() => handleStatusUpdate("PICKED_UP")}>
-        Mark Picked Up
+      <Button size="sm" disabled={loading} onClick={() => handleStatusUpdate("PICKED_UP")}>
+        {loading ? "Updating..." : "Mark Picked Up"}
       </Button>
     );
   }
 
   if (order.status === "PICKED_UP") {
     return (
-      <Button size="sm" onClick={() => handleStatusUpdate("RETURNED")}>
-        Mark Returned
+      <Button size="sm" disabled={loading} onClick={() => handleStatusUpdate("RETURNED")}>
+        {loading ? "Updating..." : "Mark Returned"}
       </Button>
     );
   }
