@@ -61,7 +61,7 @@ export interface IPayment {
   gateway: string;
   paidAt: string;
 
-  meta: Record<string, any>; 
+  meta: Record<string, any>;
 
   status: IPaymentStatus;
 
@@ -93,9 +93,61 @@ export interface IPayment {
   };
 }
 
-
 export type TReviewPayload = {
   gearItemId: string;
   rating: number;
   comment: string;
 };
+
+export interface IProviderOrder {
+  id: string;
+  customerId: string;
+  gearItemId: string;
+
+  quantity: number;
+  totalAmount: string;
+
+  status:
+    | "PLACED"
+    | "CONFIRMED"
+    | "PAID"
+    | "PICKED_UP"
+    | "RETURNED"
+    | "FAILED"
+    | "CANCELLED";
+
+  startDate: string;
+  endDate: string;
+
+  createdAt: string;
+  updatedAT: string;
+
+  customer: {
+    id: string;
+    name: string;
+    email: string;
+  };
+
+  gearItem: {
+    id: string;
+    title: string;
+    description: string;
+    specifications: {
+      length: string;
+      maxLoad: string;
+    };
+    brand: string;
+    rentalPrice: string;
+    stock: number;
+    image: string;
+
+    isFeatured: boolean;
+    featuredAt: string | null;
+
+    providerId: string;
+    categoryId: string;
+
+    createdAt: string;
+    updatedAT: string;
+  };
+}

@@ -15,21 +15,24 @@ import { logout } from "@/services/logout";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import { useState } from "react";
 
 const MobileSidebar = ({ user }: NavbarProps) => {
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const role = user.data.role as keyof typeof sidebarMenuItems;
   const navItems = sidebarMenuItems[role];
 
   const handleLogout = async () => {
+    setOpen(false)
     await logout()
     toast.success("Logged out successfully");
     router.push("/auth/login");
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="lg:hidden">
           <Menu size={22} />
@@ -57,13 +60,13 @@ const MobileSidebar = ({ user }: NavbarProps) => {
 
         <div className="space-y-2 p-5">
           {navItems.map((item) => {
-            const active =
-              pathname === item.href ;
+            const active = pathname === item.href;
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => setOpen(false)}
                 className={cn(
                   "flex items-center gap-3 rounded-xl px-4 py-2 text-sm font-medium transition-all",
                   active ? "bg-primary text-white" : "hover:bg-muted",
@@ -80,6 +83,7 @@ const MobileSidebar = ({ user }: NavbarProps) => {
 
           <Link
             href="/"
+            onClick={() => setOpen(false)}
             className="flex items-center gap-3 rounded-xl px-4 py-2 hover:bg-muted"
           >
             <HomeIcon size={18} />
