@@ -27,7 +27,7 @@ export async function proxy(request: NextRequest) {
     response.cookies.delete("accessToken");
     response.cookies.delete("refreshToken");
 
-    // return response;
+    return response;
   }
 
   if (accessToken && AUTH_ROUTES.includes(pathname)) {
