@@ -1,5 +1,3 @@
-
-
 export interface ICategory {
   id: string;
   name: string;
@@ -25,6 +23,7 @@ export interface IGear {
 
   providerId: string;
   categoryId: string;
+  provider: IUser;
 
   createdAt: string;
   updatedAT: string;
@@ -73,17 +72,16 @@ export type TGearDetails = {
 };
 
 export type IUser = {
-    id: string;
-    name: string;
-    email: string;
-    status: string;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-
+  id: string;
+  name: string;
+  email: string;
+  status: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
- type INavUser = {
+type INavUser = {
   success: boolean;
   message: string;
   data: {

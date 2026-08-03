@@ -35,7 +35,7 @@ const AdminDashboardPage = async () => {
 
         <StatCard
           title="Active Gear"
-          value={gears.meta.total}
+          value={gears.data.meta.total}
           description="Available rental gear"
           icon={Boxes}
         />

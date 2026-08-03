@@ -1,3 +1,5 @@
+import { IUser } from "@/types/type";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ICategory {
   id: string;
@@ -44,6 +46,7 @@ export interface IRental {
   totalAmount: string;
   status: TRentalStatus;
   startDate: string;
+  customer: IUser;
   endDate: string;
   createdAt: string;
   updatedAT: string;

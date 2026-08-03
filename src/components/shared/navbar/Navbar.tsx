@@ -206,8 +206,8 @@ const Navbar = ({ user }: NavbarProps) => {
                       <Button
                         variant="outline"
                         onClick={() => {
-                          router.push("/dashboard");
-                          setOpen(false);
+                          setOpen(false)
+                          handleUserMenuAction("dashboard");
                         }}
                       >
                         Dashboard
@@ -216,6 +216,7 @@ const Navbar = ({ user }: NavbarProps) => {
                       <Button
                         variant="destructive"
                         onClick={async () => {
+                            setOpen(false)
                           await handleUserMenuAction("logout");
                         }}
                       >

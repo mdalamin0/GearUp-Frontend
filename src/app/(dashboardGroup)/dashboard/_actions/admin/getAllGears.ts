@@ -3,34 +3,38 @@
 import { api } from "@/services/api";
 import { cookies } from "next/headers";
 
-//  const queryKeys = [
-//    "searchTerm",
-//    "category",
-//    "sortBy",
-//    "sortOrder",
-//    "brand",
-//    "minPrice",
-//    "maxPrice",
-//    "available",
-//    "page"
-//  ] as const;
+const queryKeys = [
+  "searchTerm",
+  "category",
+  "sortBy",
+  "sortOrder",
+  "brand",
+  "minPrice",
+  "maxPrice",
+  "available",
+  "page",
+] as const;
 
-export const getAllGears = async () => {
+export const getAllGears = async ({
+  query,
+}: {
+  query?: { [key: string]: string | string[] | undefined };
+} = {}) => {
+  const params = new URLSearchParams();
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
-  // const params = new URLSearchParams();
 
-  // queryKeys.forEach((key) => {
-  //   const value = query?.[key];
+  queryKeys.forEach((key) => {
+    const value = query?.[key];
 
-  //   if (value) {
-  //     params.set(key, String(value));
-  //   }
-  // });
+    if (value) {
+      params.set(key, String(value));
+    }
+  });
 
-  const res = await fetch(`${api}/api/admin/gears`, {
+  const res = await fetch(`${api}/api/admin/gears?${params.toString()}`, {
     headers: {
-      Cookie: `accessToken=${accessToken}`,
+      Cookie: `accessToken=${accessToken}`
     },
     cache: "force-cache",
     next: {
@@ -43,5 +47,5 @@ export const getAllGears = async () => {
   if (!gears.success) {
     throw new Error("Failed to fetch gears");
   }
-  return gears.data;
+  return gears;
 };
