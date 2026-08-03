@@ -9,7 +9,6 @@ This document outlines how the GearUp Frontend consumes backend APIs throughout 
 https://gearup-backend-szbl.onrender.com
 ```
 
-> Replace the URL above with your deployed backend API.
 
 ---
 

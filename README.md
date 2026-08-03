@@ -6,7 +6,7 @@ GearUp is a modern, full-stack sports and outdoor equipment rental platform wher
 
 ## 🌐 Live Demo & Links
 
-- 🚀 **Live Website:** https://your-frontend-url.vercel.app
+- 🚀 **Live Website:** https://gear-up-frontend-one.vercel.app
 - ⚙️ **Backend API:** https://gearup-backend-szbl.onrender.com
 - 📂 **GitHub Repository:** https://github.com/mdalamin0/GearUp-Backend
 
