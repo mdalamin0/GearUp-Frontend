@@ -14,28 +14,23 @@ export async function proxy(request: NextRequest) {
     ? jwtUtils.verifyToken(accessToken, process.env.JWT_ACCESS_SECRET as string)
     : null;
 
+  let userRole = null;
 
-   let role: string | null = null;
-
+  if (!decodedAccessToken?.success) {
+    cookieStore.delete("accessToken");
+    // return NextResponse.redirect(new URL('/login', request.url));
+  }
 
   if (decodedAccessToken?.success && decodedAccessToken.data) {
-    role = (decodedAccessToken.data as JwtPayload).role;
-  } else {
-    // Invalid / Expired Token
-    const response = NextResponse.redirect(new URL("/auth/login", request.url));
-
-    response.cookies.delete("accessToken");
-    response.cookies.delete("refreshToken");
-
-    // return response;
+    userRole = (decodedAccessToken.data as JwtPayload).role;
   }
 
   if (accessToken && AUTH_ROUTES.includes(pathname)) {
-    if (role === "CUSTOMER") {
+    if (userRole === "CUSTOMER") {
       return NextResponse.redirect(new URL("/dashboard/customer", request.url));
-    } else if (role === "PROVIDER") {
+    } else if (userRole === "PROVIDER") {
       return NextResponse.redirect(new URL("/dashboard/provider", request.url));
-    } else if (role === "ADMIN") {
+    } else if (userRole === "ADMIN") {
       return NextResponse.redirect(new URL("/dashboard/admin", request.url));
     } else {
       return NextResponse.redirect(new URL("/", request.url));
@@ -57,11 +52,14 @@ export async function proxy(request: NextRequest) {
   }
 
   // Authorization : Role based access control
-  if (pathname === "/dashboard/customer" && role !== "CUSTOMER") {
+  if (pathname.startsWith("/dashboard/customer") && userRole !== "CUSTOMER") {
     return NextResponse.redirect(new URL("/not-found", request.url));
-  } else if (pathname === "/dashboard/provider" && role !== "PROVIDER") {
+  } else if (
+    pathname.startsWith("/dashboard/provider") &&
+    userRole !== "PROVIDER"
+  ) {
     return NextResponse.redirect(new URL("/not-found", request.url));
-  } else if (pathname === "/dashboard/admin" && role !== "ADMIN") {
+  } else if (pathname.startsWith("/dashboard/admin") && userRole !== "ADMIN") {
     return NextResponse.redirect(new URL("/not-found", request.url));
   }
 
