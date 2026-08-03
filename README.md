@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏕️ GearUp - Sports & Outdoor Gear Rental Platform
 
-## Getting Started
+GearUp is a modern, full-stack sports and outdoor equipment rental platform where customers can browse and rent sports gear, providers can manage their inventory and rental orders, and administrators can oversee the entire platform. The application features secure authentication, role-based dashboards, online payment integration, customer reviews, and a fully responsive user interface.
 
-First, run the development server:
+---
+
+## 🌐 Live Demo & Links
+
+- 🚀 **Live Website:** https://your-frontend-url.vercel.app
+- ⚙️ **Backend API:** https://gearup-backend-szbl.onrender.com
+- 📂 **GitHub Repository:** https://github.com/mdalamin0/GearUp-Backend
+
+---
+
+# 🛠️ Main Technologies
+
+### Frontend
+
+- Next.js (App Router)
+- React.js
+- TypeScript
+- Tailwind CSS
+- Shadcn UI
+- Lucide React
+
+### Backend
+
+- Node.js
+- Express.js
+- Prisma ORM
+- PostgreSQL
+- JWT Authentication
+- SSLCommerz Payment Gateway
+
+---
+
+# ✨ Key Features
+
+- 🏕️ Browse sports and outdoor gear with advanced search, filtering, sorting, and pagination.
+- 🔐 Secure JWT authentication with role-based access control (Customer, Provider, Admin).
+- 📦 Complete rental workflow from booking to returning equipment.
+- 💳 Secure online payment integration using SSLCommerz.
+- ⭐ Customers can submit reviews after returning rented gear.
+- 🛒 Provider dashboard for managing gear listings and rental orders.
+- 📊 Admin dashboard with user management, category management, gear moderation, featured gear management, and rental monitoring.
+- ⚡ Fast, modern, and user-friendly interface.
+- 📱 Fully responsive across desktop, tablet, and mobile devices.
+
+---
+
+# 📦 Dependencies
+
+```json
+{
+  "next": "^15.x",
+  "react": "^19.x",
+  "react-dom": "^19.x",
+  "typescript": "^5.x",
+  "tailwindcss": "^4.x",
+  "lucide-react": "^0.x",
+  "sonner": "^2.x",
+  "react-hook-form": "^7.x",
+  "zod": "^4.x",
+  "@hookform/resolvers": "^5.x",
+  "date-fns": "^4.x",
+  "clsx": "^2.x",
+  "class-variance-authority": "^0.x"
+}
+```
+
+---
+
+# ⚙️ Getting Started
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/mdalamin0/GearUp-Frontend
+```
+
+### 2️⃣ Navigate to the project directory
+
+```bash
+cd your-project-name
+```
+
+### 3️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 4️⃣ Configure Environment Variables
+
+Create a `.env` file in the project root.
+
+```env
+BACKEND_API_URL=your_backend_api_url
+```
+
+### 5️⃣ Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 6️⃣ Open your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 👨‍💻 Author
 
-To learn more about Next.js, take a look at the following resources:
+**Md Al-amin**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📧 Email: muhammadalamin809@gmail.com
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🌐 Portfolio: https://md-alamin-portfolio.vercel.app
 
-## Deploy on Vercel
+💼 LinkedIn: https://linkedin.com/in/md-al-amin-60aa32219
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⭐ Support
+
+If you found this project helpful, please consider giving it a **⭐ Star** on GitHub.

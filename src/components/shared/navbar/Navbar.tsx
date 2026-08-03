@@ -36,7 +36,6 @@ import { logout } from "@/services/logout";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Browse Gear", href: "/gear" },
-  { label: "About", href: "/about" },
 ];
 const userMenuItems = [
   { label: "Dashboard", icon: LayoutDashboard, action: "dashboard" },
