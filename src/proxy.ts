@@ -14,7 +14,6 @@ export async function proxy(request: NextRequest) {
     ? jwtUtils.verifyToken(accessToken, process.env.JWT_ACCESS_SECRET as string)
     : null;
 
-
    let userRole = null;
 
 
