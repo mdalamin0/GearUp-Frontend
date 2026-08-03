@@ -14,15 +14,19 @@ export async function proxy(request: NextRequest) {
     ? jwtUtils.verifyToken(accessToken, process.env.JWT_ACCESS_SECRET as string)
     : null;
 
-  let userRole = null;
 
-  if (!decodedAccessToken?.success) {
-    cookieStore.delete("accessToken");
-    // return NextResponse.redirect(new URL('/login', request.url));
-  }
+   let userRole = null;
+
 
   if (decodedAccessToken?.success && decodedAccessToken.data) {
     userRole = (decodedAccessToken.data as JwtPayload).role;
+  } else {
+    // Invalid / Expired Token
+    const response = NextResponse.redirect(new URL("/auth/login", request.url));
+
+    response.cookies.delete("accessToken");
+
+    // return response;
   }
 
   if (accessToken && AUTH_ROUTES.includes(pathname)) {
@@ -54,10 +58,7 @@ export async function proxy(request: NextRequest) {
   // Authorization : Role based access control
   if (pathname.startsWith("/dashboard/customer") && userRole !== "CUSTOMER") {
     return NextResponse.redirect(new URL("/not-found", request.url));
-  } else if (
-    pathname.startsWith("/dashboard/provider") &&
-    userRole !== "PROVIDER"
-  ) {
+  } else if (pathname.startsWith("/dashboard/provider") && userRole !== "PROVIDER") {
     return NextResponse.redirect(new URL("/not-found", request.url));
   } else if (pathname.startsWith("/dashboard/admin") && userRole !== "ADMIN") {
     return NextResponse.redirect(new URL("/not-found", request.url));
