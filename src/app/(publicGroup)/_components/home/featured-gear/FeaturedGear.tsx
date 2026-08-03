@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import FeaturedGearList from "./FeaturedGearList";
 import GearGridSkeleton from "../../gear/skeleton/GearGridSkeleton";
+import GearCardSkeleton from "../../gear/skeleton/GearCardSkeleton";
 
 const FeaturedGear = () => {
   return (
@@ -22,7 +23,15 @@ const FeaturedGear = () => {
           </div>
         </div>
 
-        <Suspense fallback={<GearGridSkeleton />}>
+        <Suspense
+          fallback={
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <GearCardSkeleton key={index} />
+              ))}
+            </div>
+          }
+        >
           <FeaturedGearList />
         </Suspense>
       </div>
