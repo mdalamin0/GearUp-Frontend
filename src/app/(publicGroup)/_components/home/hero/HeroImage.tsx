@@ -1,6 +1,8 @@
+import { getHomeStats } from "@/app/(publicGroup)/_actions/home/getHomeStats";
 import Image from "next/image";
 
-const HeroImage = () => {
+const HeroImage = async() => {
+  const { totalProviders, completedRentals } = await getHomeStats();
   return (
     <div className="relative mx-auto w-full max-w-xl">
       {/* Background Glow */}
@@ -25,7 +27,7 @@ const HeroImage = () => {
       <div className="absolute -left-5 -top-6 hidden rounded-2xl border bg-background/90 px-5 py-4 shadow-xl backdrop-blur md:block">
         <p className="text-sm text-muted-foreground">Trusted Providers</p>
 
-        <h3 className="text-xl font-bold text-primary">45+</h3>
+        <h3 className="text-xl font-bold text-primary">{totalProviders}+</h3>
       </div>
 
       {/* Floating Card */}
@@ -33,7 +35,7 @@ const HeroImage = () => {
       <div className="absolute -bottom-6 -right-5 hidden rounded-2xl border bg-background/90 px-5 py-4 shadow-xl backdrop-blur md:block">
         <p className="text-sm text-muted-foreground">Rentals Completed</p>
 
-        <h3 className="text-xl font-bold text-primary">1200+</h3>
+        <h3 className="text-xl font-bold text-primary">{completedRentals}+</h3>
       </div>
     </div>
   );

@@ -15,13 +15,12 @@ const quickLinks = [
 ];
 
 const exploreLinks = [
-  { label: "Camping", href: "/gears?category=Camping" },
-  { label: "Cycling", href: "/gears?category=Cycling" },
-  { label: "Water Sports", href: "/gears?category=Water Sports" },
+  { label: "Fitness", href: "/gear?category=Fitness" },
+  { label: "Cycling", href: "/gear?category=Cycling" },
+  { label: "Water Sports", href: "/gear?category=Water Sports" },
 ];
 
 const supportLinks = [
-  { label: "Contact", href: "/contact" },
   { label: "FAQs", href: "/faq" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "/terms" },

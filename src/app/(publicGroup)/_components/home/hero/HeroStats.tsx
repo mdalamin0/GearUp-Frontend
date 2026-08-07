@@ -1,23 +1,28 @@
-const stats = [
-  {
-    value: "150+",
-    label: "Gear Items",
-  },
-  {
-    value: "45+",
-    label: "Providers",
-  },
-  {
-    value: "1.2K+",
-    label: "Happy Renters",
-  },
-  {
-    value: "4.9★",
-    label: "Average Rating",
-  },
-];
+import { getHomeStats } from "@/app/(publicGroup)/_actions/home/getHomeStats";
 
-const HeroStats = () => {
+
+const HeroStats = async() => {
+  const statsData = await getHomeStats();
+
+  const stats = [
+    {
+      value: `${statsData.totalGear}+`,
+      label: "Gear Items",
+    },
+    {
+      value: `${statsData.totalProviders}+`,
+      label: "Providers",
+    },
+    {
+      value: `${statsData.happyRenters}+`,
+      label: "Happy Renters",
+    },
+    {
+      value: `${statsData.averageRating}★`,
+      label: "Average Rating",
+    },
+  ];
+
   return (
     <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
       {stats.map((stat) => (

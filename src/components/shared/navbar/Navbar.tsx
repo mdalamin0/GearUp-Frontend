@@ -36,6 +36,7 @@ import { logout } from "@/services/logout";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Browse Gear", href: "/gear" },
+  { label: "About", href: "/about" },
 ];
 const userMenuItems = [
   { label: "Dashboard", icon: LayoutDashboard, action: "dashboard" },
@@ -47,7 +48,6 @@ const Navbar = ({ user }: NavbarProps) => {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
-
 
   const handleUserMenuAction = async (action: string) => {
     if (action === "dashboard") {
@@ -64,7 +64,11 @@ const Navbar = ({ user }: NavbarProps) => {
     if (action === "logout") {
       await logout();
       toast.success("User logged out successfully!");
-      router.push("/auth/login");
+      if (pathname.startsWith("/dashboard")) {
+        router.push("/auth/login");
+      } else {
+        router.refresh();
+      }
     }
   };
 
@@ -205,7 +209,7 @@ const Navbar = ({ user }: NavbarProps) => {
                       <Button
                         variant="outline"
                         onClick={() => {
-                          setOpen(false)
+                          setOpen(false);
                           handleUserMenuAction("dashboard");
                         }}
                       >
@@ -215,7 +219,7 @@ const Navbar = ({ user }: NavbarProps) => {
                       <Button
                         variant="destructive"
                         onClick={async () => {
-                            setOpen(false)
+                          setOpen(false);
                           await handleUserMenuAction("logout");
                         }}
                       >

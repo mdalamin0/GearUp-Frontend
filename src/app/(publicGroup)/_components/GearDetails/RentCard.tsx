@@ -5,19 +5,24 @@ import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { TGearDetails } from "@/types/type";
+import { IUser, TGearDetails } from "@/types/type";
 import { useState } from "react";
 import { differenceInCalendarDays } from "date-fns";
 import { toast } from "sonner";
 import DatePicker from "./DatePicker";
 import { createRentalOrder } from "../../_actions/gear/createRentalOrder";
 import { createPayment } from "@/app/(paymentGroup)/payment/_actions/createPayment";
-
-const RentCard = ({ gear }: TGearDetails) => {
+import { usePathname, useRouter } from "next/navigation";
+type Props = TGearDetails & {
+  user: IUser;
+};
+const RentCard = ({ gear, user }: Props) => {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -46,6 +51,13 @@ const RentCard = ({ gear }: TGearDetails) => {
   const total = days * quantity * Number(gear.rentalPrice);
 
   const handleRentNow = async () => {
+    if (user && user.role !== "CUSTOMER") {
+      toast.error(
+        "Only customers can rent gear. You must be logged in as a customer to rent gear.",
+      );
+      return;
+    }
+
     if (!startDate) {
       toast.error("Please select a start date.");
       return;
@@ -71,7 +83,19 @@ const RentCard = ({ gear }: TGearDetails) => {
       setLoading(true);
 
       // 1. Create Order
-      const order = await createRentalOrder(payload);
+      const orderResponse = await createRentalOrder(payload);
+      if (!orderResponse.success) {
+        if (orderResponse.unauthenticated) {
+            router.push(
+              `/auth/login?redirectTo=${encodeURIComponent(pathname)}`,
+            );
+          return;
+        }
+
+        toast.error(orderResponse.message);
+        return;
+      }
+      const order = orderResponse.data;
 
       // 2. Initiate Payment
       const payment = await createPayment(order.id);

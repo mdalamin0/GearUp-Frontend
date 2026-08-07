@@ -49,6 +49,7 @@ const LoginForm = () => {
         !redirectTo.startsWith("//")
       ) {
         router.push(redirectTo);
+        return
       }
 
       if (decodedToken.role === "CUSTOMER") {

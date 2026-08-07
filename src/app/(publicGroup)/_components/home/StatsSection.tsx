@@ -1,29 +1,54 @@
 import { Backpack, Users, ShoppingBag, Star } from "lucide-react";
+import { getHomeStats } from "../../_actions/home/getHomeStats";
 
-const stats = [
-  {
-    icon: Backpack,
-    value: "500+",
-    label: "Premium Gear",
-  },
-  {
-    icon: Users,
-    value: "120+",
-    label: "Verified Providers",
-  },
-  {
-    icon: ShoppingBag,
-    value: "3,000+",
-    label: "Successful Rentals",
-  },
-  {
-    icon: Star,
-    value: "4.9★",
-    label: "Average Rating",
-  },
-];
+// const stats = [
+//   {
+//     icon: Backpack,
+//     value: "500+",
+//     label: "Premium Gear",
+//   },
+//   {
+//     icon: Users,
+//     value: "120+",
+//     label: "Verified Providers",
+//   },
+//   {
+//     icon: ShoppingBag,
+//     value: "3,000+",
+//     label: "Successful Rentals",
+//   },
+//   {
+//     icon: Star,
+//     value: "4.9★",
+//     label: "Average Rating",
+//   },
+// ];
 
-const StatsSection = () => {
+const StatsSection = async() => {
+ const statsData = await getHomeStats();
+
+  const stats = [
+    {
+      icon: Backpack,
+      value: `${statsData.totalGear}+`,
+      label: "Premium Gear",
+    },
+    {
+      icon: Users,
+      value: `${statsData.totalProviders}+`,
+      label: "Verified Providers",
+    },
+    {
+      icon: ShoppingBag,
+      value: `${statsData.totalRentals}+`,
+      label: "Successful Rentals",
+    },
+    {
+      icon: Star,
+      value: `${statsData.averageRating}★`,
+      label: "Average Rating",
+    },
+  ];
   return (
     <section className="section-sm">
       <div className="container">

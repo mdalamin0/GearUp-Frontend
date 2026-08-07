@@ -7,10 +7,12 @@ import { Button } from '@/components/ui/button';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { getGearDetails } from '../../_actions/gear/getGearDetails';
 import Link from 'next/link';
+import { getMe } from '@/services/getMe';
 
 const GearDetails = async({ params }: { params: Promise<{ id: string }> }) => {
    const { id } = await params;
    const gear = await getGearDetails(id);
+   const user = await getMe();
   
   return (
     <section className="container py-12 space-y-12">
@@ -29,7 +31,7 @@ const GearDetails = async({ params }: { params: Promise<{ id: string }> }) => {
 
         <div className=" md:col-span-5">
           <GearInfo gear={gear} />
-          <RentCard gear={gear} />
+          <RentCard gear={gear} user={user.data}/>
             {/* <Specifications gear={gear} /> */}
           
         </div>
