@@ -66,7 +66,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center p-8 lg:p-14">
+    <div className="flex items-center justify-center p-6 sm:p-8 lg:p-14">
       <div className="w-full max-w-md">
         {/* Heading */}
 
@@ -187,7 +187,7 @@ const RegisterForm = () => {
           <div className="space-y-3">
             <Label>Register As</Label>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {/* Customer */}
 
               <button

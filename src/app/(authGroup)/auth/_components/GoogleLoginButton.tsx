@@ -30,7 +30,7 @@ const GoogleLoginButton = ({ onSuccess }: Props) => {
   });
   }, [onSuccess]);
 
-  return <div ref={buttonRef} className="" />;
+  return <div ref={buttonRef} className="w-full flex justify-center" />;
 };
 
 export default GoogleLoginButton;
