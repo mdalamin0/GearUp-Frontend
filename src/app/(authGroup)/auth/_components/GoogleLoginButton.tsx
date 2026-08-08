@@ -21,17 +21,16 @@ const GoogleLoginButton = ({ onSuccess }: Props) => {
       },
     });
 
-    window.google.accounts.id.renderButton(buttonRef.current, {
-      type: "standard",
-      theme: "outline",
-      size: "large",
-      text: "continue_with",
-      shape: "rectangular",
-      width: 400,
-    });
+  window.google.accounts.id.renderButton(buttonRef.current, {
+    type: "standard",
+    theme: "outline",
+    size: "large",
+    text: "continue_with",
+    shape: "rectangular",
+  });
   }, [onSuccess]);
 
-  return <div ref={buttonRef} className="flex w-full justify-center" />;
+  return <div ref={buttonRef} className="" />;
 };
 
 export default GoogleLoginButton;

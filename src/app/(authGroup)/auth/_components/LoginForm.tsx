@@ -126,12 +126,18 @@ const LoginForm = () => {
             <div className="flex items-center justify-between">
               <Label>Password</Label>
 
-              <Link
+              {/* <Link
                 href="/forgot-password"
-                className="text-sm text-primary hover:underline"
+                className="disabled text-sm text-primary hover:underline"
               >
-                Forgot Password?
-              </Link>
+                 Forgot Password?
+              </Link> */}
+              <span className="cursor-not-allowed text-sm text-primary/50">
+                Forgot Password?{" "}
+                <span className="text-xs text-muted-foreground">
+                  (Coming Soon)
+                </span>
+              </span>
             </div>
 
             <div className="relative">
@@ -194,6 +200,7 @@ const LoginForm = () => {
           only.
         </p>
         <GoogleLoginButton onSuccess={handleGoogleSuccess} />
+
         <p className="mt-8 text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
           <Link

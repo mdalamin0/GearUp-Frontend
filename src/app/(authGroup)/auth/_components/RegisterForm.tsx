@@ -199,7 +199,7 @@ const RegisterForm = () => {
                   })
                 }
                 className={cn(
-                  "relative rounded-2xl border p-5 transition-all duration-300",
+                  "relative rounded-2xl border p-3 sm:p-5 transition-all duration-300",
                   selectedRole === "CUSTOMER"
                     ? "border-primary bg-primary/5 shadow-md"
                     : "hover:border-primary",
@@ -229,7 +229,7 @@ const RegisterForm = () => {
                   })
                 }
                 className={cn(
-                  "relative rounded-2xl border p-5 transition-all duration-300",
+                  "relative rounded-2xl border p-3 sm:p-5 transition-all duration-300",
                   selectedRole === "PROVIDER"
                     ? "border-primary bg-primary/5 shadow-md"
                     : "hover:border-primary",
