@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { api } from "@/services/api";
-import { redirect } from "next/navigation";
 
 type TRentalPayload = {
   gearItemId: string;
@@ -12,9 +11,10 @@ type TRentalPayload = {
 };
 
 export const createRentalOrder = async (payload: TRentalPayload) => {
-  const cookieStore = await cookies();
+  try {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
 
-  const accessToken = cookieStore.get("accessToken")?.value;
     if (!accessToken) {
       return {
         success: false,
@@ -23,22 +23,34 @@ export const createRentalOrder = async (payload: TRentalPayload) => {
       };
     }
 
-  const res = await fetch(`${api}/api/rentals`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `accessToken=${accessToken}`,
-    },
-    body: JSON.stringify(payload),
-  });
+    const res = await fetch(`${api}/api/rentals`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `accessToken=${accessToken}`,
+      },
+      body: JSON.stringify(payload),
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
- 
+    // Backend error
+    if (!data.success) {
+      return {
+        success: false,
+        message: data.message || "Failed to create rental order.",
+      };
+    }
 
-  if (!data.success) {
-    throw new Error(data.message || "Failed to create rental order.");
+  
+    return data;
+  } catch (error) {
+    return {
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "Failed to create rental order.",
+    };
   }
-
-  return data.data;
 };

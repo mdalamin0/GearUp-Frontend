@@ -134,9 +134,6 @@ const LoginForm = () => {
               </Link> */}
               <span className="cursor-not-allowed text-sm text-primary/50">
                 Forgot Password?{" "}
-                <span className="text-xs text-muted-foreground">
-                  (Coming Soon)
-                </span>
               </span>
             </div>
 

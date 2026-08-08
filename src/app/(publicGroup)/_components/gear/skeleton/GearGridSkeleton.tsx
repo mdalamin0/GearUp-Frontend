@@ -1,12 +1,12 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import GearCardSkeleton from "./GearCardSkeleton";
-import GearToolbarSkeleton from "./GearToolbarSkeleton";
+// import GearToolbarSkeleton from "./GearToolbarSkeleton";
 
 const GearGridSkeleton = () => {
   return (
     <section className="py-10 container">
       {/* Toolbar */}
-      <GearToolbarSkeleton />
+      {/* <GearToolbarSkeleton /> */}
 
       {/* Showing Result */}
       <div className="py-3">

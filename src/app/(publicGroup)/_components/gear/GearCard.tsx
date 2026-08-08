@@ -52,7 +52,9 @@ const GearCard = ({ gear }: GearCardProps) => {
 
             <span className="text-sm font-medium">{gear.averageRating}</span>
 
-            <span className="text-sm text-muted-foreground">({gear.reviewCount} Reviews)</span>
+            <span className="text-sm text-muted-foreground">
+              ({gear.reviewCount} Reviews)
+            </span>
           </div>
         </div>
 
@@ -65,13 +67,12 @@ const GearCard = ({ gear }: GearCardProps) => {
           </h4>
         </div>
 
-
-          <Button disabled={gear.stock === 0} asChild className="w-full">
-            <Link href={`gear/${gear.id}`}>
-              Rent Now
-              <ArrowRight className=" size-4" />
-            </Link>
-          </Button>
+        <Button disabled={gear.stock === 0} asChild className="w-full">
+          <Link href={`gear/${gear.id}`}>
+            View Details & Rent
+            <ArrowRight className=" size-4" />
+          </Link>
+        </Button>
       </div>
     </article>
   );
