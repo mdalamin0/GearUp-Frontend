@@ -14,6 +14,8 @@ import { loginUser } from "../_actions/login";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import GoogleLoginButton from "./GoogleLoginButton";
+import { googleLogin } from "../_actions/googleLogin";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,7 +51,7 @@ const LoginForm = () => {
         !redirectTo.startsWith("//")
       ) {
         router.push(redirectTo);
-        return
+        return;
       }
 
       if (decodedToken.role === "CUSTOMER") {
@@ -61,6 +63,19 @@ const LoginForm = () => {
       }
     } else {
       toast.error(res.message);
+    }
+  };
+
+  const handleGoogleSuccess = async (idToken: string) => {
+   
+    const result = await googleLogin(idToken);
+
+    if (result.success) {
+      toast.success(result.message);
+
+      router.push("/dashboard/customer");
+    } else {
+      toast.error(result.message);
     }
   };
   return (
@@ -163,6 +178,22 @@ const LoginForm = () => {
 
         {/* Footer */}
 
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-3 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+        <p className="my-2 text-center text-xs text-orange-400">
+          Note: Google Sign-In is currently available for Customer accounts
+          only.
+        </p>
+        <GoogleLoginButton onSuccess={handleGoogleSuccess} />
         <p className="mt-8 text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
           <Link

@@ -14,6 +14,8 @@ import { registerUser } from "../_actions/register";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import GoogleLoginButton from "./GoogleLoginButton";
+import { googleLogin } from "../_actions/googleLogin";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -49,6 +51,17 @@ const RegisterForm = () => {
       router.push("/auth/login");
     } else {
       toast.error(res.message);
+    }
+  };
+
+  const handleGoogleSuccess = async (idToken: string) => {
+    const result = await googleLogin(idToken);
+
+    if (result.success) {
+      toast.success(result.message);
+      router.push("/dashboard/customer");
+    } else {
+      toast.error(result.message);
     }
   };
 
@@ -250,6 +263,10 @@ const RegisterForm = () => {
 
         {/* Footer */}
 
+        <p className="mt-8 mb-2 text-center text-xs text-orange-400">
+          Google Sign-Up is currently available for Customer accounts only.
+        </p>
+        <GoogleLoginButton onSuccess={handleGoogleSuccess} />
         <p className="mt-8 text-center text-sm text-muted-foreground">
           Already have an account?{" "}
           <Link

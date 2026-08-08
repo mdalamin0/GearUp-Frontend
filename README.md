@@ -96,6 +96,8 @@ Create a `.env` file in the project root.
 
 ```env
 BACKEND_API_URL=your_backend_api_url
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
+JWT_ACCESS_SECRET=your_access_secret
 ```
 
 ### 5️⃣ Run the development server
