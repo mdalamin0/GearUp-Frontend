@@ -266,7 +266,9 @@ const RegisterForm = () => {
         <p className="mt-8 mb-2 text-center text-xs text-orange-400">
           Google Sign-Up is currently available for Customer accounts only.
         </p>
-        <GoogleLoginButton onSuccess={handleGoogleSuccess} />
+        <div className="min-h-14 w-full ">
+          <GoogleLoginButton onSuccess={handleGoogleSuccess} />
+        </div>
         <p className="mt-8 text-center text-sm text-muted-foreground">
           Already have an account?{" "}
           <Link
