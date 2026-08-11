@@ -196,7 +196,7 @@ const LoginForm = () => {
           Note: Google Sign-In is currently available for Customer accounts
           only.
         </p>
-        <div className="min-h-14 w-full ">
+        <div className="min-h-18 w-full ">
           <GoogleLoginButton onSuccess={handleGoogleSuccess} />
         </div>
 
