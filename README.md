@@ -126,6 +126,5 @@ http://localhost:3000
 
 ---
 
-## ⭐ Support
-
-If you found this project helpful, please consider giving it a **⭐ Star** on GitHub.
+## DevOps & Workflow
+- Managed version control using GitHub branching and structured PRs.
