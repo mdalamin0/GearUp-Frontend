@@ -43,6 +43,7 @@ const RegisterForm = () => {
   const selectedRole = watch("role");
 
   const onSubmit = async (data: RegisterSchemaType) => {
+
     const res = await registerUser(data);
 
     if (res.success) {
@@ -86,6 +87,74 @@ const RegisterForm = () => {
           onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}
           className="mt-8 space-y-6"
         >
+          {/* Role */}
+
+          <div className="space-y-3">
+            <Label>Register As</Label>
+
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {/* Customer */}
+
+              <button
+                type="button"
+                onClick={() =>
+                  setValue("role", "CUSTOMER", {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
+                className={cn(
+                  "relative rounded-2xl border p-3 sm:p-5 transition-all duration-300",
+                  selectedRole === "CUSTOMER"
+                    ? "border-primary bg-primary/5 shadow-md"
+                    : "hover:border-primary",
+                )}
+              >
+                {selectedRole === "CUSTOMER" && (
+                  <Check className="absolute right-3 top-3 size-5 text-primary" />
+                )}
+
+                <User className="mx-auto size-7 text-primary" />
+
+                <h3 className="mt-3 font-semibold">Customer</h3>
+
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Rent outdoor gear.
+                </p>
+              </button>
+
+              {/* Provider */}
+
+              <button
+                type="button"
+                onClick={() =>
+                  setValue("role", "PROVIDER", {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
+                className={cn(
+                  "relative rounded-2xl border p-3 sm:p-5 transition-all duration-300",
+                  selectedRole === "PROVIDER"
+                    ? "border-primary bg-primary/5 shadow-md"
+                    : "hover:border-primary",
+                )}
+              >
+                {selectedRole === "PROVIDER" && (
+                  <Check className="absolute right-3 top-3 size-5 text-primary" />
+                )}
+
+                <Store className="mx-auto size-7 text-primary" />
+
+                <h3 className="mt-3 font-semibold">Provider</h3>
+
+                <p className="mt-1 text-sm text-muted-foreground">
+                  List your gear.
+                </p>
+              </button>
+            </div>
+          </div>
+          <input type="hidden" {...register("role")} />
           {/* Name */}
 
           <div className="space-y-2">
@@ -182,74 +251,6 @@ const RegisterForm = () => {
             </div>
           </div>
 
-          {/* Role */}
-
-          <div className="space-y-3">
-            <Label>Register As</Label>
-
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {/* Customer */}
-
-              <button
-                type="button"
-                onClick={() =>
-                  setValue("role", "CUSTOMER", {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                  })
-                }
-                className={cn(
-                  "relative rounded-2xl border p-3 sm:p-5 transition-all duration-300",
-                  selectedRole === "CUSTOMER"
-                    ? "border-primary bg-primary/5 shadow-md"
-                    : "hover:border-primary",
-                )}
-              >
-                {selectedRole === "CUSTOMER" && (
-                  <Check className="absolute right-3 top-3 size-5 text-primary" />
-                )}
-
-                <User className="mx-auto size-7 text-primary" />
-
-                <h3 className="mt-3 font-semibold">Customer</h3>
-
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Rent outdoor gear.
-                </p>
-              </button>
-
-              {/* Provider */}
-
-              <button
-                type="button"
-                onClick={() =>
-                  setValue("role", "PROVIDER", {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                  })
-                }
-                className={cn(
-                  "relative rounded-2xl border p-3 sm:p-5 transition-all duration-300",
-                  selectedRole === "PROVIDER"
-                    ? "border-primary bg-primary/5 shadow-md"
-                    : "hover:border-primary",
-                )}
-              >
-                {selectedRole === "PROVIDER" && (
-                  <Check className="absolute right-3 top-3 size-5 text-primary" />
-                )}
-
-                <Store className="mx-auto size-7 text-primary" />
-
-                <h3 className="mt-3 font-semibold">Provider</h3>
-
-                <p className="mt-1 text-sm text-muted-foreground">
-                  List your gear.
-                </p>
-              </button>
-            </div>
-          </div>
-          <input type="hidden" {...register("role")} />
           {/* Button */}
 
           <Button
