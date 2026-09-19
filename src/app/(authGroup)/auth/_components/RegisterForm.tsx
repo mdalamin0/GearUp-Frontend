@@ -153,7 +153,7 @@ const RegisterForm = () => {
               <Input
                 {...register("password")}
                 type={showPassword ? "text" : "password"}
-                placeholder="********"
+                placeholder="*******"
                 className={cn(
                   "h-12 rounded-xl pl-10 pr-10",
                   errors.password &&
