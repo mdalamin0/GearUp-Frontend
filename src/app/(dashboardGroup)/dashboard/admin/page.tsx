@@ -42,7 +42,7 @@ const AdminDashboardPage = async () => {
 
         <StatCard
           title="Total Rentals"
-          value={orders.length}
+          value={orders?.data?.length}
           description="Rental orders created"
           icon={ShoppingBag}
         />
