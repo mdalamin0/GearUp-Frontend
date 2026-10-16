@@ -1,15 +1,26 @@
-
-
 import RentalTable from "../../_components/admin/RentalTable";
 import RentalCard from "../../_components/admin/RentalCard";
 
-
 import { getAllRentals } from "../../_actions/admin/getAllRentals";
 import { IRental } from "../../types/type";
+import GearPagination from "@/app/(publicGroup)/_components/gear/GearPagination";
+import SearchInput from "@/components/shared/SearchInput";
 
-const RentalOrdersPage = async () => {
-  const rentals = await getAllRentals();
+type SearchParams = Promise<{
+  [key: string]: string | string[] | undefined;
+}>;
 
+const RentalOrdersPage = async ({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) => {
+  const query = await searchParams;
+  const rentalsData = await getAllRentals({ query });
+  const rentals = rentalsData?.data;
+  const meta = rentalsData?.meta;
+  const start = (meta.page - 1) * meta.limit + 1;
+  const end = Math.min(meta.page * meta.limit, meta.total);
 
   return (
     <div className="space-y-6">
@@ -23,7 +34,23 @@ const RentalOrdersPage = async () => {
         </p>
       </div>
 
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+        <div className="flex-1 ">
+          <SearchInput placeholder="Search Rental Orders..." />
+        </div>
+      </div>
+
       {/* Desktop */}
+      <div className="mb-6 flex items-center justify-between">
+        <p className="text-sm text-muted-foreground">
+          Showing{" "}
+          <span className="font-semibold text-foreground">
+            {start}–{end}
+          </span>{" "}
+          of <span className="font-semibold text-foreground">{meta.total}</span>{" "}
+          rental orders
+        </p>
+      </div>
 
       <div className="hidden lg:block">
         <RentalTable rentals={rentals} />
@@ -46,6 +73,11 @@ const RentalOrdersPage = async () => {
           </div>
         )}
       </div>
+      {/* Pagination */}
+
+      {meta.totalPages > 1 && (
+        <GearPagination currentPage={meta.page} totalPages={meta.totalPages} />
+      )}
     </div>
   );
 };
