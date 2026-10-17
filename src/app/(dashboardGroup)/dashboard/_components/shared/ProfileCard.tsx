@@ -31,7 +31,6 @@ const ProfileCard = ({ user }: Props) => {
 
       <div className="grid gap-5 p-6 md:grid-cols-2">
         <ProfileInfoCard icon={User} label="Full Name" value={user.name} />
-
         <ProfileInfoCard icon={Mail} label="Email Address" value={user.email} />
 
         <ProfileInfoCard

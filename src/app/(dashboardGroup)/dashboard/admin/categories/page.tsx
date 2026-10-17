@@ -68,3 +68,4 @@ const CategoriesPage = async () => {
 };
 
 export default CategoriesPage;
+

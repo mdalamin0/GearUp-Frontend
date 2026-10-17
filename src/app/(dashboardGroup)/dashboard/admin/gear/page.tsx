@@ -52,9 +52,6 @@ const GearManagementPage = async ({
         </p>
       </div>
 
-      {/* <div className="">
-        <CategoryTabs categories={categories}></CategoryTabs>
-      </div> */}
 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
         <div className="flex-1 ">

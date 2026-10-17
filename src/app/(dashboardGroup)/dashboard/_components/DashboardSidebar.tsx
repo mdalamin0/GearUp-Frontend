@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { HomeIcon, LogOut } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { NavbarProps } from "@/types/type";
 import { sidebarMenuItems } from "../_config/sidebarMenuItems";
@@ -17,7 +16,6 @@ const DashboardSidebar = ({ user }: NavbarProps) => {
   const router = useRouter();
 
   const role = user.data?.role as keyof typeof sidebarMenuItems;
-
   const navItems = sidebarMenuItems[role];
 
   const handleLogout = async () => {
@@ -27,19 +25,18 @@ const DashboardSidebar = ({ user }: NavbarProps) => {
   };
 
   return (
-    <aside className="hidden w-72 shrink-0 border-r bg-background lg:flex lg:flex-col">
-      {/* User */}
-
-      <div className="border-b px-6 py-6">
+    <aside className="fixed inset-y-0 left-0 z-40 hidden h-screen w-72 shrink-0 flex-col overflow-hidden border-r bg-background lg:flex">
+      {/* User Profile */}
+      <div className="shrink-0 border-b px-6 py-6">
         <div className="flex items-center gap-4">
           <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-foreground">
             {user.data.name.charAt(0).toUpperCase()}
           </div>
 
-          <div className="overflow-hidden">
+          <div className="min-w-0 flex-1">
             <h3 className="truncate font-semibold">{user.data.name}</h3>
 
-            <p className="mt-1 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-primary w-fit">
+            <p className="mt-1 w-fit rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-primary">
               {user.data.role}
             </p>
           </div>
@@ -47,52 +44,50 @@ const DashboardSidebar = ({ user }: NavbarProps) => {
       </div>
 
       {/* Navigation */}
-
-      <nav className="flex-1 space-y-2 p-5">
+      <nav className="min-h-0 flex-1 space-y-2 overflow-y-auto p-5">
         {navItems.map((item) => {
-          const active =
-            pathname === item.href ;
+          const active = pathname === item.href;
 
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200",
+                "flex items-center gap-4 rounded-full px-5 py-3 text-sm font-medium transition-colors",
                 active
                   ? "bg-primary text-primary-foreground shadow-sm"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
               )}
             >
               <item.icon size={18} />
-
               <span>{item.title}</span>
             </Link>
           );
         })}
-        <Separator></Separator>
+
+        <Separator className="!my-4" />
+
         <Link
-          href={"/"}
-          className="flex items-center gap-3 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 hover:text-foreground text-muted-foreground hover:bg-muted"
+          href="/"
+          className="flex items-center gap-4 rounded-full px-5 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
         >
-          {" "}
-          <HomeIcon size={18} /> Back to Home
+          <HomeIcon size={20} />
+          <span>Back to Home</span>
         </Link>
       </nav>
 
-      {/* Bottom */}
-
-      <div className="border-t p-5 space-y-4">
+      {/* Bottom Actions */}
+      <div className="shrink-0 space-y-4 border-t bg-background p-5">
         <Button
           onClick={handleLogout}
           variant="ghost"
-          className="w-full justify-start gap-3 text-destructive hover:text-destructive"
+          className="w-full justify-start gap-4 rounded-full px-4 text-destructive hover:bg-destructive/10 hover:text-destructive"
         >
           <LogOut size={18} />
-          Logout
+          <span>Logout</span>
         </Button>
 
-        <div className=" text-xs text-muted-foreground">GearUp v1.0</div>
+        <div className="px-1 text-xs text-muted-foreground">GearUp v1.0</div>
       </div>
     </aside>
   );
